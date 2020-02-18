@@ -150,14 +150,23 @@
   <ItemGroup>
     <ClCompile Include="Algo.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="HouseInterface.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="RobotRep.cpp" />
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algo.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="House.h" />
+    <ClInclude Include="HouseInterface.h" />
     <ClInclude Include="RobotRep.h" />
     <ClInclude Include="Simulation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="House1.txt" />
+    <Text Include="House2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

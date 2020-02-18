@@ -1,12 +1,12 @@
 #pragma once
+#include "Common.h"
 class HouseInterface
 {
-	HouseInterface();
 public:
-	bool isClean();
-	bool isWall(Direction d);
-	bool isDirty();
-	void moveRobot(Direction d);
+	virtual bool isClean() const=0;
+	virtual bool isWall(Direction d) const =0;
+	virtual bool isDirty() const =0;
+	virtual void moveRobot(Direction d)=0;
 
 };
 
