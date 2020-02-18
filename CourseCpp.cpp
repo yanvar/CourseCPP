@@ -2,14 +2,39 @@
 //
 
 #include <iostream>
+#include <vector>
+
+#include "Simulation.h"
+
 
 using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!" << endl;
-    return 0;
+    int numOfConfigFiles = 1;
+    int numOfRobotAlgos = 1;
+   
+
+    string housePath1 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house1.txt";
+    string housePath2 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house2.txt";
+
+    string algoPath1 = // create new class;
+    string algoPath2 = // create new class;
+
+    Simulation sim();
+
+    Simulation::addHouse(housePath1);
+    Simulation::addHouse(housePath2);
+    Simulation::addAlgo(algoPath1);
+    Simulation::addAlgo(algoPath2);
+
+    Simulation::runSim();
+
+    Simulation::printResults();
+    Simulation::writeResultsToFile();
 }
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

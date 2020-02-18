@@ -1,21 +1,18 @@
 #pragma once
-
-
-
 enum class Direction {
 	LEFT, UP, RIGHT, DOWN, STAY
 };
 
 
 class WallSensorInterface {
-	bool isWall(Direction d) const 
+	bool isWall(Direction d) const
 	{
 
 	}
 };
 
 class DirtSensorInterface {
-	bool isDirty() const 
+	bool isDirty() const
 	{
 
 	}
