@@ -5,6 +5,7 @@
 #include "Common.h"
 #include "House.h"
 
+
 class Simulation
 {
 public:
