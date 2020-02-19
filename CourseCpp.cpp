@@ -11,15 +11,13 @@ using namespace std;
 
 int main()
 {
-    int numOfConfigFiles = 1;
-    int numOfRobotAlgos = 1;
-   
-
     string housePath1 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house1.txt";
     string housePath2 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house2.txt";
 
-    string algoPath1 = // create new class;
-    string algoPath2 = // create new class;
+    string algo1 = // create new class;
+    string algo2 = // create new class;
+
+
 
     Simulation sim();
 

@@ -4,7 +4,7 @@
 
 #include "Common.h"
 #include "House.h"
-
+#include "Algo.h"
 
 class Simulation
 {
@@ -15,15 +15,6 @@ public:
 	bool isWall(Direction d) const;
 	bool isDirty() const;
 	int stepsLeft() const;
-
-	template<typename RobotRep>
-	init(RobotRep& robot, std::Map<std::string, int> config);
-
-	Direction nextStep(Direction lastMove, bool& finish);
-
-	const std::string& getName() const;
-
-	const std::string& getDescription() const;
 
 	void addHouse(string house);
 	void addAlgo(string algo);

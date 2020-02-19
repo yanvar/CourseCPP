@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 Simulation()
 {
 }
@@ -20,21 +19,27 @@ void addAlgo(algo)
 }
 int runSim()
 {
-
+	// loop over ALL algos
 	for (auto algoIter : m_allAlgos)
 	{
 		
-
+		// loop over ALL houses
 		for (auto houseIter : m_allHouses)
 		{
-			map<string, int> houseMap;
 			Direction lastMove = STAY;
 			Direction recommendedDirection;
 			bool finish = false;
 			int simStepsCntr = houseIter.getMaxSteps();
-			houseMapInRobot.insert(std::pair<string, int>("Max_Steps", simStepsCntr));
 
-			init(RobotRep & robot, houseMapInRobot);
+			// create empty house configuration
+			map<string, int> houseConfig;
+			// add pair to the map
+			houseConfig.insert(std::pair<string, int>("Max_Steps", simStepsCntr));
+
+			//TODO: create RobotREP object and pass it to init
+			
+
+			init(RobotRep & robot, houseConfig);
 			recommendedDirection = robot.nextStep(lastMove, finish);
 			while (!finish && simStepsCntr)
 			{
