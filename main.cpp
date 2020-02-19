@@ -9,8 +9,7 @@ int main()
 	House h("/home/yanivv/Project/repos/CourseCPP/House1.txt");
 
 	h.printRoom();
-
-	std::cout << h.isClean() << std::endl;
+//	std::cout << "Clean percentege=" << h.getCleanPercentage()<< std::endl;
 
 	
 	std::cout << std::endl;

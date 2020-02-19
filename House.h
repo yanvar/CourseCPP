@@ -36,20 +36,22 @@ public:
 	void moveRobot(Direction d);
 	void printRoom() const;
 	char& operator()(int row, int col);
-	
+	double getCleanPercentage() const;
+
 
 private:
 	std::vector<char> m_origMapping;
 	std::vector<char> m_currentMapping;
 	int m_rows, m_cols,m_maxStep;
 	RobotLocation m_robotLocation;
+	int m_origAccumulatedDirt = 0;
 
-	int GetVectorLocation(int r, int c) const;
-	char GetCurrentState() const;
-	void MarkFirstRawAsWall();
-	void MarkLastRawAsWall();
-	void MarkFirstAndLastColAsWall();
-	void FillHouseContent( ifstream& myfile);
-
+	int getVectorLocation(int r, int c) const;
+	char getCurrentState() const;
+	void markFirstRawAsWall();
+	void markLastRawAsWall();
+	void markFirstAndLastColAsWall();
+	void fillHouseContent( ifstream& myfile);
+	int getRoomAccumulatedDirt() const;
 };
 

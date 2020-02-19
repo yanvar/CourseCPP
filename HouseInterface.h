@@ -7,10 +7,6 @@ public:
 	virtual bool isWall(Direction d) const =0;
 	virtual bool isDirty() const =0;
 	virtual void moveRobot(Direction d)=0;
-
-	// TODO:add the following APIs
-
-	float getCleanPercentage();  // finalTotalDirtAmount / originalTotalDirtAmount 
-
+	virtual double getCleanPercentage() const = 0;  // finalTotalDirtAmount / originalTotalDirtAmount 
 };
 
