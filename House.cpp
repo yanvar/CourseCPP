@@ -23,21 +23,32 @@ House::House(const char* path)
 		m_rows = stoi(line);
 		std::getline(myfile, line);
 		m_cols= stoi(line);
-
-		//cout << m_maxStep << " " << m_cols << " " << m_rows << " " << endl;
-		MarkFirstRawAsWall();		
-		
+		markFirstRawAsWall();				
 		getline(myfile, line); //Skip first line
-		FillHouseContent(myfile);
-		MarkLastRawAsWall();
-		MarkFirstAndLastColAsWall();
+		fillHouseContent(myfile);
+		markLastRawAsWall();
+		markFirstAndLastColAsWall();
         myfile.close();
     }
-
 	m_currentMapping = m_origMapping;
+	m_origAccumulatedDirt = getRoomAccumulatedDirt();
 }
 
-void House::FillHouseContent(ifstream& myfile)
+int House::getRoomAccumulatedDirt() const
+{
+	int accumulatedDirt = 0;
+	for(auto c : m_currentMapping)
+	{
+
+		if (c > '0' && c <= '9')
+		{
+			accumulatedDirt += c - '0';
+		}
+	}
+	return accumulatedDirt;
+}  
+
+void House::fillHouseContent(ifstream& myfile)
 {
 		int row = 1;
 		string line;
@@ -56,10 +67,9 @@ void House::FillHouseContent(ifstream& myfile)
 			}
 			row++;
         }
-	
 }
 
-void House::MarkFirstRawAsWall()
+void House::markFirstRawAsWall()
 {
 		for (int i = 0; i < m_rows; i++)
 		{
@@ -70,7 +80,7 @@ void House::MarkFirstRawAsWall()
 		}	
 }
 
-void House::MarkLastRawAsWall()
+void House::markLastRawAsWall()
 {
 	for (int i = 0; i < m_cols; i++)
 	{
@@ -78,7 +88,7 @@ void House::MarkLastRawAsWall()
 	}
 }
 
-void House::MarkFirstAndLastColAsWall()
+void House::markFirstAndLastColAsWall()
 {
 	for (int i = 0; i < m_rows; i++) 
 	{
@@ -99,10 +109,11 @@ void House::printRoom() const
 		cout << endl;
 	}
 	cout << "Robot location: " << m_robotLocation.m_currnetRow << " " << m_robotLocation.m_currnetCol << endl;
+	cout << "Room dirt level = " << m_origAccumulatedDirt << endl;
 }
 
 
-int House::GetVectorLocation(int r, int c) const
+int House::getVectorLocation(int r, int c) const
 {
 	return ((r * m_cols) + c);
 }
@@ -112,26 +123,26 @@ char& House::operator()(int row, int col)
 	return m_currentMapping[(row*m_cols)+col];
 }
 
-char House::GetCurrentState() const {
-	return m_currentMapping[GetVectorLocation(m_robotLocation.m_currnetRow, m_robotLocation.m_currnetCol)];
+char House::getCurrentState() const {
+	return m_currentMapping[getVectorLocation(m_robotLocation.m_currnetRow, m_robotLocation.m_currnetCol)];
 }
 
 
 bool House::isClean() const
 {
-	char c = GetCurrentState();
+	char c = getCurrentState();
 	return (c == '0' || c == ' ' || c == 'D');
 }
 
 bool House::isWall(Direction d) const
 {
-	char c = GetCurrentState();
+	char c = getCurrentState();
 	return (c == 'W' || c == 'w');
 }
 bool House::isDirty() const
 {
-	char c = GetCurrentState();
-	return (c > '0' || c <= '9');
+	char c = getCurrentState();
+	return (c > '0' && c <= '9');
 }
 
 void House::moveRobot(Direction d)
@@ -155,3 +166,9 @@ void House::moveRobot(Direction d)
 
 }
 
+
+double House::getCleanPercentage() const
+{
+	double dirtPercent = getRoomAccumulatedDirt() / m_origAccumulatedDirt;
+	return (1-dirtPercent)*100;
+}
