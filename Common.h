@@ -15,20 +15,20 @@ enum class Mode {
 class WallSensorInterface {
 	bool isWall(Direction d) const 
 	{
-
+		return true;
 	}
 };
 
 class DirtSensorInterface {
 	bool isDirty() const 
 	{
-
+		return true;
 	}
 };
 
 class BatterySensorInterface {
 	int stepsLeft() const
 	{
-
+		return 0;
 	}
 };
