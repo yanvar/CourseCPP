@@ -149,20 +149,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algo.cpp" />
+    <ClCompile Include="Battery.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
+    <ClCompile Include="EdgeAlgo.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseInterface.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RandomAlgo.cpp" />
     <ClCompile Include="RobotRep.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="CleanlinessSensor.cpp" />
+    <ClCompile Include="SpiralAlgo.cpp" />
+    <ClCompile Include="WallSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algo.h" />
+    <ClInclude Include="CleanlinessSensor.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="EdgeAlgo.h" />
+    <ClInclude Include="Battery.h" />
+    <ClInclude Include="WallSensor.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="HouseInterface.h" />
+    <ClInclude Include="RandomAlgo.h" />
     <ClInclude Include="RobotRep.h" />
     <ClInclude Include="Simulation.h" />
+    <ClInclude Include="SpiralAlgo.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />

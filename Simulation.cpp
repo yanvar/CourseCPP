@@ -10,12 +10,12 @@ Simulation()
 void addHouse(string housePath)
 {
 	House house(housePath);
-	allHouses.push_back(house);
+	m_allHouses.push_back(house);
 }
 void addAlgo(algo)
 {
 	Algo algo(algoPath);
-	allHouses.push_back(algo);
+	m_allAlgos.push_back(algo);
 }
 int runSim()
 {
@@ -40,6 +40,8 @@ int runSim()
 			
 
 			init(RobotRep & robot, houseConfig);
+			Battery battery(int chargedCapacity);
+
 			recommendedDirection = robot.nextStep(lastMove, finish);
 			while (!finish && simStepsCntr)
 			{
