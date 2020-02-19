@@ -84,9 +84,15 @@ int House::GetVectorLocation(int r, int c) const
 	return ((r * c) + c);
 }
 
+char& House::operator()(int row, int col)
+{
+	return m_currentMapping[(row*m_cols)+col];
+}
+
 char House::GetCurrentState() const {
 	return m_currentMapping[GetVectorLocation(m_robotLocation.m_currnetRow, m_robotLocation.m_currnetCol)];
 }
+
 
 bool House::isClean() const
 {

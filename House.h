@@ -16,6 +16,7 @@ public:
 
 	//RobotLocation getLocation()
 };
+
 class House : public HouseInterface
 {
 public:
@@ -25,6 +26,7 @@ public:
 	bool isDirty() const;
 	void moveRobot(Direction d);
 	void printRoom() const;
+	char& operator()(int row, int col);
 	
 
 private:

@@ -1,15 +1,19 @@
 #include <iostream>
 #include "House.h"
 
+using namespace std;
+
 int main() 
 {
 	std::cout << "Test";
-	House h("C:\/Users\/jonat\/source\/repos\/Project6\/Project6\/House1.txt");
+	House h("/home/yanivv/Project/repos/CourseCPP/House1.txt");
 	h.printRoom();
+
 	std::cout << h.isClean() << std::endl;
 
+	
 	std::cout << std::endl;
-	House h2("C:\/Users\/jonat\/source\/repos\/Project6\/Project6\/House2.txt");
+	House h2("/home/yanivv/Project/repos/CourseCPP/House2.txt");
 	h2.printRoom();
 
 	return 0;
