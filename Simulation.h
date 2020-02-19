@@ -11,8 +11,8 @@
 class Simulation
 {
 public:
-	Simulation();
-	int algoGrade;
+	Simulation(int maxSteps, int batteryFullCapacityInSteps, int batteryConsumptionRate, float m_batteryRechargeRate);
+	int algoGrade; // TBD vector vectr
 
 	bool isWall(Direction d) const;
 	bool isDirty() const;
@@ -25,15 +25,33 @@ public:
 	int printResults();
 	int writeResultsToFile();
 
+	float calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE & m_singleSimGrade);
+	void updateSimResultsVector(, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+	void updateSimResultsVector(, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+
+	typedef struct m_singleSimGrade {
+		float cleanGrade = 100;
+		int remainingSteps = 0;
+	} M_SINGLE_SIM_GRADE;
+
+	int m_batteryFullCapacityInSteps;
+	int m_batteryConsumptionRate;
+	float m_batteryRechargeRate;
 
 private:
+
+	int m_maxSteps;
+
 	vector<House> m_allHouses;
 	vector<Algo> m_allAlgos;
 
 
 
-	vector<float> m_algosGradeList;
+	vector<float> m_algosAgregatedGradeList;
+	vector<M_SINGLE_SIM_GRADE> m_algoHouseSimGrade;
 	float m_totalAlgoGrade = 0;
 	float m_singleSimGrade = 0;
+
+	
 
 };

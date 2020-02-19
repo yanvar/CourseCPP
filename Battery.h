@@ -6,13 +6,13 @@
 
 class Battery() {
 public:
-	Battery(int chargeLevelInSteps) :
+	Battery(int chargeLevelInSteps);
 
 	// battery measured in "steps" units
 	void setBatteryLevelInSteps(int stepsToSet);
 	int getBatteryLevelInSteps();
 	bool isBatteryEmpty();
-	int consumeBatterySingleStep();
+	int decrementBatterySingleStep();
 	int chargeBatterySingleStep();
 
 

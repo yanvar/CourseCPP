@@ -1,0 +1,1 @@
+RobotRep& robotRep = RobotRep(houseIter, battery)

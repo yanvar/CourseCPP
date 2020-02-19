@@ -21,15 +21,15 @@ int main()
 
     Simulation sim();
 
-    Simulation::addHouse(housePath1);
-    Simulation::addHouse(housePath2);
-    Simulation::addAlgo(algoPath1);
-    Simulation::addAlgo(algoPath2);
+    sim.addHouse(housePath1);
+	sim.addHouse(housePath2);
+	sim.addAlgo(algoPath1);
+	sim.addAlgo(algoPath2);
 
-    Simulation::runSim();
+	sim.runSim();
 
-    Simulation::printResults();
-    Simulation::writeResultsToFile();
+    //Simulation::printResults();
+    //Simulation::writeResultsToFile();
 }
 
 
