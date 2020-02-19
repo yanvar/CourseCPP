@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <string>
 #include <sstream>
 #include <algorithm>
 #include <iterator>
@@ -25,18 +24,23 @@ House::House(const char* path)
 		std::getline(myfile, line);
 		m_cols= stoi(line);
 
-		cout << m_maxStep << " " << m_cols << " " << m_rows << " " << endl;
+		//cout << m_maxStep << " " << m_cols << " " << m_rows << " " << endl;
+		MarkFirstRawAsWall();		
 		
-		for (int i = 0; i < m_rows; i++)
-		{
-			for (int j = 0; j < m_cols; j++)
-			{
-				m_origMapping.push_back('W');
-			}
-		}
-
 		getline(myfile, line); //Skip first line
+		FillHouseContent(myfile);
+		MarkLastRawAsWall();
+		MarkFirstAndLastColAsWall();
+        myfile.close();
+    }
+
+	m_currentMapping = m_origMapping;
+}
+
+void House::FillHouseContent(ifstream& myfile)
+{
 		int row = 1;
+		string line;
         while (getline(myfile, line))
         {
 			if (row == m_rows)
@@ -52,17 +56,36 @@ House::House(const char* path)
 			}
 			row++;
         }
-		for (int i = 0; i < m_rows; i++) {
-			m_origMapping[(m_cols *i)] = 'W';
-			m_origMapping[(m_cols * i) + (m_cols-1)] = 'W';
-		}
-		for (int i = 0; i < m_cols; i++) {
-			m_origMapping[((m_rows-1)*(m_cols))+i]='W';
-		}
-        myfile.close();
-    }
+	
+}
 
-	m_currentMapping = m_origMapping;
+void House::MarkFirstRawAsWall()
+{
+		for (int i = 0; i < m_rows; i++)
+		{
+			for (int j = 0; j < m_cols; j++)
+			{
+				m_origMapping.push_back('W');
+			}
+		}	
+}
+
+void House::MarkLastRawAsWall()
+{
+	for (int i = 0; i < m_cols; i++)
+	{
+		m_origMapping[((m_rows-1)*(m_cols))+i]='W';	
+	}
+}
+
+void House::MarkFirstAndLastColAsWall()
+{
+	for (int i = 0; i < m_rows; i++) 
+	{
+		m_origMapping[(m_cols *i)] = 'W';
+		m_origMapping[(m_cols * i) + (m_cols-1)] = 'W';
+	}
+	
 }
 
 void House::printRoom() const
@@ -81,7 +104,7 @@ void House::printRoom() const
 
 int House::GetVectorLocation(int r, int c) const
 {
-	return ((r * c) + c);
+	return ((r * m_cols) + c);
 }
 
 char& House::operator()(int row, int col)
