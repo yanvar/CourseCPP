@@ -2,7 +2,16 @@
 #include "Common.h"
 #include "HouseInterface.h"
 #include <vector>
+#include <iostream>
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+
+using namespace std;
 
 class RobotLocation {
 public:
@@ -37,6 +46,10 @@ private:
 
 	int GetVectorLocation(int r, int c) const;
 	char GetCurrentState() const;
+	void MarkFirstRawAsWall();
+	void MarkLastRawAsWall();
+	void MarkFirstAndLastColAsWall();
+	void FillHouseContent( ifstream& myfile);
 
 };
 
