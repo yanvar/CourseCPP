@@ -1,29 +1,59 @@
+#include "Battery.h"
 
-class Battery() {
-public:
-	Battery(int chargeLevelInSteps) : m_batteryLevelInSteps(chargeLevelInSteps) {}
+using namespace std;
 
-	void setBatteryLevelInSteps(int stepsToSet)
+//class Battery()
+//{
+//public:
+	Battery::Battery(int initChargeLevelInSteps) : m_initBatteryLevelInSteps(initChargeLevelInSteps), m_currentBatteryLevelInSteps(initChargeLevelInSteps) 
 	{
-		m_batteryLevelInSteps = stepsToSet;
+		cout << "BATTERY: Was attached!!! CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
 	}
 
-	int getBatteryLevelInSteps()
+	int Battery::setBatteryLevelInSteps(int batteryLevelToSet)
 	{
-		return m_batteryLevelInSteps;
+		m_currentBatteryLevelInSteps = batteryLevelToSet;
+		cout << "BATTERY: Charge Level was set. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
+		return m_currentBatteryLevelInSteps;
 	}
-	bool isBatteryEmpty()
+
+	int Battery::getBatteryLevelInSteps()
 	{
-		if (m_batteryLevelInSteps == 0)
+		cout << "BATTERY: Charge Level was checked. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
+		return m_currentBatteryLevelInSteps;
+	}
+	bool Battery::isBatteryEmpty()
+	{
+		if (m_currentBatteryLevelInSteps == 0)
+		{
+			cout << "BATTERY: Emptiness was checked. Battery is EMPTY!" << endl;
 			return true;
+		}
+
+		cout << "BATTERY: Emptiness was checked. Battery is NOT EMPTY!" << endl;
 		return false;
 	}
 
-
-	int decrementBatterySingleStep()
+	int Battery::decrementBatterySingleStep()
 	{
-		if (m_batteryLevelInSteps == 0)
-			return true;
+		m_currentBatteryLevelInSteps -= m_batteryConsumptionRate; // current energy - energy consumed during single robot step (measured in robot steps)
+		if (m_currentBatteryLevelInSteps < D_BATTERY_ZERO_ENERGY)
+			m_currentBatteryLevelInSteps = D_BATTERY_ZERO_ENERGY;
+
+		cout << "BATTERY: DecrementBatteryStep. Consumed " << m_batteryConsumptionRate << " steps. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
+
+		return m_currentBatteryLevelInSteps;
 	}
 
-	int chargeBatterySingleStep();
+	int Battery::chargeBatteryDringSingleStep()
+	{
+		m_currentBatteryLevelInSteps += (int)m_batteryRechargeRate; // current energy + energy added during single charging step (measured in robot steps)
+		if (m_currentBatteryLevelInSteps > m_initBatteryLevelInSteps)
+			m_currentBatteryLevelInSteps = m_initBatteryLevelInSteps;
+
+		cout << "BATTERY: ChargeBatteryStep. Charged by " << m_batteryRechargeRate << " steps. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
+
+		return m_currentBatteryLevelInSteps;
+	}
+//}
+
