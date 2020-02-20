@@ -36,7 +36,7 @@ public:
 	void moveRobot(Direction d);
 	void printRoom() const;
 	char& operator()(int row, int col);
-	double getCleanPercentage() const;
+	float getCleanPercentage() const;
 	int getMaxSteps() const;
 	Direction getLastStep(Direction d) const;
 	bool isOnDockingLocation() const;

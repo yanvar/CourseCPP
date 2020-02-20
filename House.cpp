@@ -182,8 +182,8 @@ void House::moveRobot(Direction d)
 }
 
 
-double House::getCleanPercentage() const
+float House::getCleanPercentage() const
 {
-	double dirtPercent = getRoomAccumulatedDirt() / m_origAccumulatedDirt;
+	float dirtPercent = (float)getRoomAccumulatedDirt() / m_origAccumulatedDirt;
 	return (1-dirtPercent)*100;
 }
