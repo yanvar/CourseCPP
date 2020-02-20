@@ -18,7 +18,7 @@ unsigned int Battery::setBatteryLevelInSteps(int batteryLevelToSet)
 	return m_currentBatteryLevelInSteps;
 }
 
-int Battery::getBatteryLevelInSteps() const
+int Battery::stepsLeft() const
 {
 	cout << "BATTERY: Charge Level was checked. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
 	return m_currentBatteryLevelInSteps;

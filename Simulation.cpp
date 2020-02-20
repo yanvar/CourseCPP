@@ -44,8 +44,8 @@ int Simulation::runSim()
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
-			//RobotRep robotRep = RobotRep(houseIter, battery);
-			RobotRep robotRep = RobotRep(houseIter);
+			RobotRep robotRep = RobotRep(houseIter, battery);
+			//RobotRep robotRep = RobotRep(houseIter);
 
 			algoIter.init(robotRep, houseConfig);
 			

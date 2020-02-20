@@ -107,6 +107,9 @@
     <ClInclude Include="DirtSensorInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BatteryInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />
