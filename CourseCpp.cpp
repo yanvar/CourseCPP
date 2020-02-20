@@ -5,26 +5,33 @@
 #include <vector>
 
 #include "Simulation.h"
+#include "RandomAlgo.h"
+#include "SpiralAlgo.h"
+#include "EdgeAlgo.h"
+#include "House.h"
 
+#define D_BATTERY_FULL_CAPACITY         (150)
+#define D_BATTERY_CONSUMPTION_STEP_RATE (1)
+#define D_BATTERY_CHARGE_RATE           (2.5)
 
 using namespace std;
 
 int main()
 {
-    string housePath1 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house1.txt";
-    string housePath2 = "C:\Users\Yaniv Vardi\source\repos\test\ConsoleApplication1\ConfigHomes\house2.txt";
+    //k string housePath1 = "House1.txt"; // path depends on PC (should be switched to relative path c_str(); to try
+    //k string housePath2 = "House2.txt";
 
-    string algo1 = // create new class;
-    string algo2 = // create new class;
+    SpiralAlgo algo1; // create new class + init;
+    EdgeAlgo algo2;   // create new class + init;
 
+    Simulation sim(D_BATTERY_FULL_CAPACITY, D_BATTERY_CONSUMPTION_STEP_RATE, D_BATTERY_CHARGE_RATE);
 
+    sim.addHouse("House1.txt");
+    sim.addHouse("House2.txt");
+	//k sim.addHouse(housePath2);
 
-    Simulation sim();
-
-    sim.addHouse(housePath1);
-	sim.addHouse(housePath2);
-	sim.addAlgo(algoPath1);
-	sim.addAlgo(algoPath2);
+	sim.addAlgo(algo1);
+	sim.addAlgo(algo2);
 
 	sim.runSim();
 

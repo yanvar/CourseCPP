@@ -1,23 +1,24 @@
 #include "Simulation.h"
 
-
 using namespace std;
 
-Simulation(int maxSteps, int batteryFullCapacityInSteps, int batteryConsumptionRate, float batteryRechargeRate) :
-	m_maxSteps(maxSteps), m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate))
+Simulation::Simulation(int batteryFullCapacityInSteps, int batteryConsumptionRate, float batteryRechargeRate) :
+	m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)
 {}
 
-void addHouse(string housePath)
+void Simulation::addHouse(const char * housePath)
 {
 	House house(housePath);
 	m_allHouses.push_back(house);
 }
-void addAlgo(algo)
+
+void Simulation::addAlgo(Algo algo)
 {
-	Algo algo(algoPath);
+	//k Algo algo(algo);
 	m_allAlgos.push_back(algo);
 }
-int runSim()
+
+int Simulation::runSim()
 {
 	// loop over ALL algos
 	for (auto algoIter : m_allAlgos)
@@ -26,38 +27,38 @@ int runSim()
 		// loop over ALL houses
 		for (auto houseIter : m_allHouses)
 		{
-			Direction lastMove = STAY;
+			Direction lastMove = Direction::STAY;
 			Direction recommendedDirection;
 			bool finish = false;
-			int simStepsCntr = houseIter.getMaxSteps();
+			int houseRemainingStepsCntr = houseIter.getMaxSteps();
 
 			// create empty house configuration
 			map<string, int> houseConfig;
 			// add pair to the map
-			houseConfig.insert(std::pair<string, int>("Max_Steps", simStepsCntr));
-			Battery battery(int m_batteryFullCapacityInSteps);
-			
-			//TODO: create RobotREP object and pass it to init
-			RobotRep& robotRep = RobotRep(houseIter, battery);
+			houseConfig.insert(std::pair<string, int>("Max_Steps", houseRemainingStepsCntr));
 
-			init(robotRep, houseConfig);
+	        // create new battery
+			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
+			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
+			RobotRep robotRep = RobotRep(houseIter, battery);
+
+			algoIter.init(robotRep, houseConfig);
 			
-			recommendedDirection = robot.nextStep(lastMove, finish);
-			while (!finish && simStepsCntr)
+			recommendedDirection = algoIter.nextStep(lastMove, finish);
+			while (!finish && houseRemainingStepsCntr)
 			{
 				lastMove = houseIter.getLastStep(recommendedDirection);
-				recommendedDirection = robot.nextStep(lastMove, finish);
+				recommendedDirection = algoIter.nextStep(lastMove, finish);
 
-				simStepsCntr--;
-				if (battery.decrementBatterySingleStep() == 0) && (!houseIter.isOnDockingLocation()))
-				break;
-
+				houseRemainingStepsCntr--;
+				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter.isOnDockingLocation()))
+					break;
 			}
 
 			M_SINGLE_SIM_GRADE singleSimGrade;
 
-			calcSingleSimGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, singleSimGrade);
+			calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
 			updateSimResultsVector(singleSimGrade);
 		}
 		calcSingleAgregatedAlgoGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, singleSimGrade);
@@ -65,12 +66,12 @@ int runSim()
 	}
 
 	decideBestAlgo();
-	print ALL !!!
+	//print ALL !!!
 }
 
 
 
-	void calcSingleSimGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, m_singleSimGrade)
+	void Simulation::calcSingleSimGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, m_singleSimGrade)
 	{
 
 		if (!houseIter.isOnDockingLocation())
@@ -84,14 +85,36 @@ int runSim()
 			m_singleSimGrade.remainingSteps = simStepsCntr;
 		}
 	}
-	void updateSimResultsVectorvoid(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+	void Simulation::updateSimResultsVectorvoid(M_SINGLE_SIM_GRADE& m_singleSimGrade)
 	{
 		m_algoHouseSimGrade.push_back(m_singleSimGrade);
 	}
 
 
-int printResults();
-int writeResultsToFile();
+int Simulation::printResults()
+{
+
+}
+
+int Simulation::writeResultsToFile();
+{
+
+}
+
+float Simulation::calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+{
+
+}
+
+void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+{
+
+}
+
+void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+{
+
+}
 
 
 

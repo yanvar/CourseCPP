@@ -1,14 +1,28 @@
 #pragma once
-// TODO: add 3 functions + implement (call House API)
+#include "HouseInterface.h"
+#include "House.h"
+#include "Battery.h"
 
-const WallSensor& getWallSensor() const;
-const DirtSensor& getDirtSensor() const;
-const BatterySensor& getBatterySensor() const;
-
-
-RobotRep& robotRep = RobotRep(houseIter, battery)
 class RobotRep
 {
-	RobotRep(House houseIter, Battery battery): m_house(house), m_battery(battery) {}
-	bool IsClean
+
+public:
+	RobotRep(House house, Battery battery);
+
+	//implement all virtual functions of houseIF!
+
+	// TODO: add 3 functions + implement (call House API)
+
+	bool isWall(Direction d) const;
+	bool isDirty() const;
+	int stepsLeft() const;
+
+private:
+	House m_houseInstance;
+	Battery m_battery;
+	
 };
+
+
+
+

@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 enum class Direction {
 	LEFT, UP, RIGHT, DOWN, STAY
 };
@@ -32,3 +30,19 @@ class BatterySensorInterface {
 		return 0;
 	}
 };
+
+
+// TODOs:
+
+/*
+//Shulamit/Kosta:
+
+1.toString(Direction to string in Algo.cpp) // needed for printouts, minor
+
+
+//Michal/Yaniv:
+1. int getMaxSteps();   //is missing MAJOR!
+2. Direction getLastStep(recommendedDirection);  // to update robot location and house status + return actual step!!!
+3. bool isOnDockingLocation();    // returns true if robot is on docking (0,0), or false otherwise
+
+*/

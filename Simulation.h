@@ -7,27 +7,24 @@
 #include "House.h"
 #include "Algo.h"
 #include "Battery.h"
+#include "RobotRep.h"
 
 class Simulation
 {
 public:
-	Simulation(int maxSteps, int batteryFullCapacityInSteps, int batteryConsumptionRate, float m_batteryRechargeRate);
+	Simulation(int batteryFullCapacityInSteps, int batteryConsumptionRate, float m_batteryRechargeRate);
 	int algoGrade; // TBD vector vectr
 
-	bool isWall(Direction d) const;
-	bool isDirty() const;
-	int stepsLeft() const;
-
-	void addHouse(string house);
-	void addAlgo(string algo);
+	void addHouse(const char* housePath);
+	void addAlgo(Algo algo);
 	int runSim();
 
 	int printResults();
 	int writeResultsToFile();
 
-	float calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE & m_singleSimGrade);
-	void updateSimResultsVector(, M_SINGLE_SIM_GRADE& m_singleSimGrade)
-	void updateSimResultsVector(, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+	void calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE & m_singleSimGrade);
+	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
+	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
 
 	typedef struct m_singleSimGrade {
 		float cleanGrade = 100;
@@ -39,8 +36,6 @@ public:
 	float m_batteryRechargeRate;
 
 private:
-
-	int m_maxSteps;
 
 	vector<House> m_allHouses;
 	vector<Algo> m_allAlgos;

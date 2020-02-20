@@ -1,15 +1,27 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <map>
 
-class Algo()
+#include "Common.h"
+
+template<class T_RobotRep>
+class Algo
 {
-	Algo()
-
+	
 public:
-	template<typename RobotRep>
-	void init(RobotRep & robot, Map<string, int> config);
+	Algo();
+
+	//template<typename T_RobotRep>
+	void init(T_RobotRep& robot, std::map<std::string, int> config)
+	{
+		m_remainingSteps = config["Max_Steps"];
+		m_robotRep = robot;
+	}
+
 	Direction nextStep(Direction lastMove, bool& finish);
-	const String& getName() const;
-	const String& getDescription() const;
+	const std::string& getName() const;
+	const std::string& getDescription() const;
 
 	int calculateOptimalStepsToCharge();
 	int calculateChargeRateAndStore();
@@ -24,23 +36,23 @@ public:
 private:
 
 protected:
-	string m_algoName;
-	string m_algoDescription;
+	std::string m_algoName;
+	std::string m_algoDescription;
 	struct currentPosition {
 		int x = 0;
 		int y = 0;
 	};
-	
+
 	// dynamic map is required!! to mark Undescovered, clean and dirt levels - on discovered map
 	//TBD
 
 	// map that holds -  battery level : steps added after 1 charging time;
-	map<int, int> m_calculatedBatteryChargingRate;
+	std::map<int, int> m_calculatedBatteryChargingRate;
 
-	int getRemainingSteps();
+	const int getRemainingSteps();
 	void decrementRemainingStep();
 
 	int m_remainingSteps;
-	template<typename RobotRep> m_robotRep;
-}
-
+	
+	T_RobotRep m_robotRep;
+};
