@@ -16,7 +16,7 @@ public:
 	int algoGrade; // TBD vector vectr
 
 	void addHouse(const char* housePath);
-	void addAlgo(Algo<RobotRep> algo);
+	void addAlgo(Algo algo);
 	int runSim();
 
 	int printResults();
