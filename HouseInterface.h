@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 #include "Common.h"
 class HouseInterface
 {
@@ -8,8 +10,8 @@ public:
 	virtual bool isDirty() const =0;
 	virtual void moveRobot(Direction d)=0;
 	virtual float getCleanPercentage() const = 0;  // finalTotalDirtAmount / originalTotalDirtAmount 
-	virtual int getMaxSteps() const = 0;
-	virtual Direction getLastStep(Direction d) const = 0;
+	virtual uint32_t getMaxSteps() const = 0;
+	virtual Direction updateLastStep(Direction d) = 0;
 	virtual bool isOnDockingLocation() const = 0;
 
 };

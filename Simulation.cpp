@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Simulation::Simulation(int batteryFullCapacityInSteps, int batteryConsumptionRate, float batteryRechargeRate) :
+Simulation::Simulation(uint32_t batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate) :
 	m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)
 {}
 
@@ -18,15 +18,14 @@ void Simulation::addAlgo(Algo algo)
 	m_allAlgos.push_back(algo);
 }
 
-int Simulation::runSim()
+uint32_t Simulation::runSim()
 {
 	// loop over ALL algos
 	for (auto algoIter : m_allAlgos)
 	{
-
 		// loop over ALL houses
 		//for (auto houseIter : m_allHouses)
-		for(int i=0; i<m_allHouses.size();i++)
+		for(uint32_t i=0; i<m_allHouses.size();i++)
 		{
 			Direction lastMove = Direction::STAY;
 			Direction recommendedDirection;
@@ -52,7 +51,7 @@ int Simulation::runSim()
 			recommendedDirection = algoIter.nextStep(lastMove, finish);
 			while (!finish && houseRemainingStepsCntr)
 			{
-				lastMove = houseIter->getLastStep(recommendedDirection);
+				lastMove = houseIter->updateLastStep(recommendedDirection);
 				recommendedDirection = algoIter.nextStep(lastMove, finish);
 
 				houseRemainingStepsCntr--;
@@ -79,35 +78,35 @@ int Simulation::runSim()
 
 
 
-	float Simulation::calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+float Simulation::calcSingleSimGrade(bool finish, uint32_t simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+{
+
+	if (!houseIter.isOnDockingLocation())
 	{
-
-		if (!houseIter.isOnDockingLocation())
-		{
-			m_singleSimGrade.cleanGrade = 0;
-			m_singleSimGrade.remainingSteps = 0;
-		}
-		else
-		{
-			m_singleSimGrade.cleanGrade = houseIter.getCleanPercentage();
-			m_singleSimGrade.remainingSteps = simStepsCntr;
-		}
-
-		return 0; //TODO
+		m_singleSimGrade.cleanGrade = 0;
+		m_singleSimGrade.remainingSteps = 0;
+	}
+	else
+	{
+		m_singleSimGrade.cleanGrade = houseIter.getCleanPercentage();
+		m_singleSimGrade.remainingSteps = simStepsCntr;
 	}
 
-	void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
-	{
-		m_algoHouseSimGrade.push_back(m_singleSimGrade);
-	}
+	return 0; //TODO
+}
+
+void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+{
+	m_algoHouseSimGrade.push_back(m_singleSimGrade);
+}
 
 
-int Simulation::printResults()
+uint32_t Simulation::printResults()
 {
 	return 0; //TODO
 }
 
-int Simulation::writeResultsToFile()
+uint32_t Simulation::writeResultsToFile()
 {
 	return 0; //TODO
 }

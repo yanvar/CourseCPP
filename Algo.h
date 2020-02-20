@@ -27,8 +27,8 @@ public:
 	const std::string& getName() const;
 	const std::string& getDescription() const;
 
-	int calculateOptimalStepsToCharge();
-	int calculateChargeRateAndStore();
+	uint32_t calculateOptimalStepsToCharge();
+	uint32_t calculateChargeRateAndStore();
 	// decide whether we on GO, RETURN or CHARGE mode
 	Mode calculateMode();
 
@@ -43,20 +43,20 @@ protected:
 	std::string m_algoName;
 	std::string m_algoDescription;
 	struct currentPosition {
-		int x = 0;
-		int y = 0;
+		uint32_t x = 0;
+		uint32_t y = 0;
 	};
 
 	// dynamic map is required!! to mark Undescovered, clean and dirt levels - on discovered map
 	//TBD
 
 	// map that holds -  battery level : steps added after 1 charging time;
-	std::map<int, int> m_calculatedBatteryChargingRate;
+	std::map<uint32_t, uint32_t> m_calculatedBatteryChargingRate;
 
-	const int getRemainingSteps();
+	const uint32_t getRemainingSteps();
 	void decrementRemainingStep();
 
-	int m_remainingSteps;
+	uint32_t m_remainingSteps = 0;
 
 	WallSensor* m_wallSensor = nullptr;
 	DirtSensor* m_dirtSensor = nullptr;

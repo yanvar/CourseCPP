@@ -24,7 +24,7 @@ Direction Algo::nextStep(Direction lastMove, bool& finish)
 	bool upSideWall = m_wallSensor->isWall(Direction::UP);
 	//bool isClean = m_wallSensor->isWall(Direction::LEFT);
 
-	cout << "ALGO: nextStep: Next proposed step is - " << "STAY" << endl; // implement translation from Direction enum to string!!!
+	cout << "ALGO: nextStep: Next proposed step is - " << DirectionToStr.at(nextStepDirection) << endl;
 	return nextStepDirection;
 }
 
@@ -40,7 +40,7 @@ const string& Algo::getDescription() const
 }
 
 
-const int Algo::getRemainingSteps()
+const uint32_t Algo::getRemainingSteps()
 {
 	return m_remainingSteps;
 }
@@ -51,13 +51,13 @@ void Algo::decrementRemainingStep()
 	m_remainingSteps--;
 }
 
-int Algo::calculateOptimalStepsToCharge()
+uint32_t Algo::calculateOptimalStepsToCharge()
 {
 	return 0;
 }
 
 
-int Algo::calculateChargeRateAndStore()
+uint32_t Algo::calculateChargeRateAndStore()
 {
 	return 0;
 }

@@ -12,15 +12,15 @@
 class Simulation
 {
 public:
-	Simulation(int batteryFullCapacityInSteps, int batteryConsumptionRate, float m_batteryRechargeRate);
-	int m_algoGrade; // TBD vector vectr
+	Simulation(uint32_t batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float m_batteryRechargeRate);
+	//int m_algoGrade; // TBD vector vectr TODO
 
 	void addHouse(const char* housePath);
 	void addAlgo(Algo algo);
-	int runSim();
+	uint32_t runSim();
 
-	int printResults();
-	int writeResultsToFile();
+	uint32_t printResults();
+	uint32_t writeResultsToFile();
 
 
 	typedef struct m_singleSimGrade {
@@ -29,12 +29,12 @@ public:
 	} M_SINGLE_SIM_GRADE;
 
 
-	float calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade);
+	float calcSingleSimGrade(bool finish, uint32_t simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade);
 	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
 
 
-	int m_batteryFullCapacityInSteps;
-	int m_batteryConsumptionRate;
+	uint32_t m_batteryFullCapacityInSteps;
+	uint32_t m_batteryConsumptionRate;
 	float m_batteryRechargeRate;
 
 private:

@@ -1,7 +1,18 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <map>
 
 enum class Direction {
 	LEFT, UP, RIGHT, DOWN, STAY
+};
+
+static std::map<Direction, const char*> DirectionToStr = {
+	{Direction::LEFT,  "Left"},
+	{Direction::UP,    "Up"},
+	{Direction::RIGHT, "Right"},
+	{Direction::DOWN,  "Down"},
+	{Direction::STAY,  "Stay"}
 };
 
 // robot may be either in cleaning mode or Return to Base or Charging on Docking station
@@ -30,19 +41,4 @@ class BatterySensorInterface {
 		return 0;
 	}
 };
-*/
-
-// TODOs:
-
-/*
-//Shulamit/Kosta:
-
-1.toString(Direction to string in Algo.cpp) // needed for printouts, minor
-
-
-//Michal/Yaniv:
-1. int getMaxSteps();   //is missing MAJOR!
-2. Direction getLastStep(recommendedDirection);  // to update robot location and house status + return actual step!!!
-3. bool isOnDockingLocation();    // returns true if robot is on docking (0,0), or false otherwise
-
 */
