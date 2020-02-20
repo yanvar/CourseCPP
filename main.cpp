@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main() 
+int main_TODO() 
 {
 	std::cout << "Test:" << endl;
 	House h("/home/yanivv/Project/repos/CourseCPP/House1.txt");

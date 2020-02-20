@@ -16,20 +16,22 @@ public:
 	int algoGrade; // TBD vector vectr
 
 	void addHouse(const char* housePath);
-	void addAlgo(Algo algo);
+	void addAlgo(Algo<RobotRep> algo);
 	int runSim();
 
 	int printResults();
 	int writeResultsToFile();
 
-	void calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE & m_singleSimGrade);
-	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
-	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
 
 	typedef struct m_singleSimGrade {
 		float cleanGrade = 100;
 		int remainingSteps = 0;
 	} M_SINGLE_SIM_GRADE;
+
+
+	float calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade);
+	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
+
 
 	int m_batteryFullCapacityInSteps;
 	int m_batteryConsumptionRate;

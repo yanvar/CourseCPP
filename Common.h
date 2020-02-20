@@ -9,7 +9,7 @@ enum class Mode {
 	GO, RETURN, DOCK // DOCK may be included in GO
 };
 
-
+/*
 class WallSensorInterface {
 	bool isWall(Direction d) const 
 	{
@@ -30,7 +30,7 @@ class BatterySensorInterface {
 		return 0;
 	}
 };
-
+*/
 
 // TODOs:
 

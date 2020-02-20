@@ -48,6 +48,21 @@ int House::getRoomAccumulatedDirt() const
 	return accumulatedDirt;
 }  
 
+int House::getMaxSteps() const
+{
+	return 0; //TODO**************
+}
+
+Direction House::getLastStep(Direction d) const
+{
+	return Direction::STAY; //TODO**************
+}
+ bool House::isOnDockingLocation() const
+{
+	return 0; //TODO**************
+}
+
+
 void House::fillHouseContent(ifstream& myfile)
 {
 		int row = 1;

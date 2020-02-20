@@ -25,12 +25,15 @@ int Simulation::runSim()
 	{
 
 		// loop over ALL houses
-		for (auto houseIter : m_allHouses)
+		//for (auto houseIter : m_allHouses)
+		for(int i=0; i<m_allHouses.size();i++)
 		{
 			Direction lastMove = Direction::STAY;
 			Direction recommendedDirection;
+			
+			auto houseIter = &m_allHouses[i];
 			bool finish = false;
-			int houseRemainingStepsCntr = houseIter.getMaxSteps();
+			int houseRemainingStepsCntr = houseIter->getMaxSteps();
 
 			// create empty house configuration
 			map<string, int> houseConfig;
@@ -41,37 +44,42 @@ int Simulation::runSim()
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
-			RobotRep robotRep = RobotRep(houseIter, battery);
+			//RobotRep robotRep = RobotRep(houseIter, battery);
+			RobotRep robotRep = RobotRep(houseIter);
 
 			algoIter.init(robotRep, houseConfig);
 			
 			recommendedDirection = algoIter.nextStep(lastMove, finish);
 			while (!finish && houseRemainingStepsCntr)
 			{
-				lastMove = houseIter.getLastStep(recommendedDirection);
+				lastMove = houseIter->getLastStep(recommendedDirection);
 				recommendedDirection = algoIter.nextStep(lastMove, finish);
 
 				houseRemainingStepsCntr--;
-				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter.isOnDockingLocation()))
+				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter->isOnDockingLocation()))
 					break;
 			}
 
 			M_SINGLE_SIM_GRADE singleSimGrade;
 
-			calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
+			//todo calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
 			updateSimResultsVector(singleSimGrade);
 		}
-		calcSingleAgregatedAlgoGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, singleSimGrade);
-		updateSingleAgregatedAlgoGrade(singleSimGrade);
+		// TODO
+		//calcSingleAgregatedAlgoGrade(simStepsCntr, houseIter, finalRobotLocation, battery, singleSimGrade);
+		//updateSingleAgregatedAlgoGrade(singleSimGrade);
 	}
 
-	decideBestAlgo();
+	//TODO decideBestAlgo();
 	//print ALL !!!
+
+	//TODO
+	return 0;
 }
 
 
 
-	void Simulation::calcSingleSimGrade(finish, simStepsCntr, houseIter, finalRobotLocation, battery, m_singleSimGrade)
+	float Simulation::calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade)
 	{
 
 		if (!houseIter.isOnDockingLocation())
@@ -84,8 +92,11 @@ int Simulation::runSim()
 			m_singleSimGrade.cleanGrade = houseIter.getCleanPercentage();
 			m_singleSimGrade.remainingSteps = simStepsCntr;
 		}
+
+		return 0; //TODO
 	}
-	void Simulation::updateSimResultsVectorvoid(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+
+	void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
 	{
 		m_algoHouseSimGrade.push_back(m_singleSimGrade);
 	}
@@ -93,15 +104,16 @@ int Simulation::runSim()
 
 int Simulation::printResults()
 {
-
+	return 0; //TODO
 }
 
-int Simulation::writeResultsToFile();
+int Simulation::writeResultsToFile()
 {
-
+	return 0; //TODO
 }
 
-float Simulation::calcSingleSimGrade(finish, simStepsCntr, houseIter, Battery&, M_SINGLE_SIM_GRADE& m_singleSimGrade)
+/*TODO
+float Simulation::calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery&, M_SINGLE_SIM_GRADE& m_singleSimGrade)
 {
 
 }
@@ -110,11 +122,6 @@ void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
 {
 
 }
-
-void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
-{
-
-}
-
+*/
 
 

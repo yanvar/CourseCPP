@@ -4,19 +4,23 @@
 #include <map>
 
 #include "Common.h"
+#include "RobotRep.h"
 
-template<class T_RobotRep>
+
 class Algo
 {
 	
 public:
 	Algo();
 
-	//template<typename T_RobotRep>
+	template<typename T_RobotRep>
 	void init(T_RobotRep& robot, std::map<std::string, int> config)
 	{
 		m_remainingSteps = config["Max_Steps"];
-		m_robotRep = robot;
+
+		m_wallSensor = (robot.getWallSensor());
+		//dirtSensor = &(robot.getDirtSensor());
+		//batterySensor = &(robot.getBatterySensor());
 	}
 
 	Direction nextStep(Direction lastMove, bool& finish);
@@ -29,8 +33,8 @@ public:
 	Mode calculateMode();
 
 
-	void updateMapScan(Direction dir);
-	void updateCurrentLocation(Direction dir);
+	//void updateMapScan(Direction dir);
+	//void updateCurrentLocation(Direction dir);
 
 
 private:
@@ -53,6 +57,9 @@ protected:
 	void decrementRemainingStep();
 
 	int m_remainingSteps;
+
+	WallSensor* m_wallSensor = nullptr;
+	//const DirtSensor* dirtSensor = nullptr;
+	//const BatterySensor* batterySensor = nullptr;
 	
-	T_RobotRep m_robotRep;
 };

@@ -3,7 +3,8 @@
 #include "Algo.h"
 #include <iostream>
 
-class EdgeAlgo : public Algo 
+
+class EdgeAlgo : public Algo
 {
 
 public:

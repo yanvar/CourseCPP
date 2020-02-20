@@ -37,7 +37,9 @@ public:
 	void printRoom() const;
 	char& operator()(int row, int col);
 	double getCleanPercentage() const;
-
+	int getMaxSteps() const;
+	Direction getLastStep(Direction d) const;
+	bool isOnDockingLocation() const;
 
 private:
 	std::vector<char> m_origMapping;
@@ -53,5 +55,7 @@ private:
 	void markFirstAndLastColAsWall();
 	void fillHouseContent( ifstream& myfile);
 	int getRoomAccumulatedDirt() const;
+	
 };
+
 

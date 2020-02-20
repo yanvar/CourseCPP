@@ -161,6 +161,7 @@
     <ClCompile Include="CleanlinessSensor.cpp" />
     <ClCompile Include="SpiralAlgo.cpp" />
     <ClCompile Include="WallSensor.cpp" />
+    <ClCompile Include="WallSensorInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algo.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="RobotRep.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="SpiralAlgo.h" />
+    <ClInclude Include="WallsensorInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />

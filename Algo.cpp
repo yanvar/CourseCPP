@@ -2,21 +2,20 @@
 
 using namespace std;
 
-template<class T_RobotRep>
-Algo<T_RobotRep>::Algo()
+
+Algo::Algo()
 {
 	std::cout << "ALGO: Constructor: Base class object - Algo was created!" << std::endl;
 }
 
-template<class T_RobotRep>
-void Algo<T_RobotRep>::init(T_RobotRep& robot, std::map<std::string, int> config)
-{
-	m_remainingSteps = config["Max_Steps"];
-	m_robotRep = robot;
-}
+//template<class T_RobotRep>
+//void Algo::init(T_RobotRep& robot, std::map<std::string, int> config)
+//{
+//	m_remainingSteps = config["Max_Steps"];
+//	m_robotRep = robot;
+//}
 
-template<class T_RobotRep>
-Direction Algo<T_RobotRep>::nextStep(Direction lastMove, bool& finish)
+Direction Algo::nextStep(Direction lastMove, bool& finish)
 {
 	Direction nextStepDirection = Direction::STAY;
 
@@ -24,26 +23,52 @@ Direction Algo<T_RobotRep>::nextStep(Direction lastMove, bool& finish)
 	return nextStepDirection;
 }
 
-template<class T_RobotRep>
-const string& Algo<T_RobotRep>::getName() const
+const string& Algo::getName() const
 {
 	return m_algoName;
 }
 
-template<class T_RobotRep>
-const string& Algo<T_RobotRep>::getDescription() const
+
+const string& Algo::getDescription() const
 {
 	return m_algoDescription;
 }
 
-template<class T_RobotRep>
-const int Algo<T_RobotRep>::getRemainingSteps()
+
+const int Algo::getRemainingSteps()
 {
 	return m_remainingSteps;
 }
 
-template<class T_RobotRep>
-void Algo<T_RobotRep>::decrementRemainingStep()
+
+void Algo::decrementRemainingStep()
 {
 	m_remainingSteps--;
+}
+
+int Algo::calculateOptimalStepsToCharge()
+{
+	return 0;
+}
+
+
+int Algo::calculateChargeRateAndStore()
+{
+	return 0;
+}
+
+// decide whether we on GO, RETURN or CHARGE mode
+
+Mode Algo::calculateMode()
+{
+	return Mode::DOCK;
+}
+
+void updateMapScan(Direction dir)
+{
+
+}
+void updateCurrentLocation(Direction dir)
+{
+
 }
