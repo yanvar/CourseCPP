@@ -18,6 +18,11 @@ Algo::Algo()
 Direction Algo::nextStep(Direction lastMove, bool& finish)
 {
 	Direction nextStepDirection = Direction::STAY;
+	bool leftSideWall = m_wallSensor->isWall(Direction::LEFT);
+	bool rightSideWall = m_wallSensor->isWall(Direction::RIGHT);
+	bool downSideWall = m_wallSensor->isWall(Direction::DOWN);
+	bool upSideWall = m_wallSensor->isWall(Direction::UP);
+	//bool isClean = m_wallSensor->isWall(Direction::LEFT);
 
 	cout << "ALGO: nextStep: Next proposed step is - " << "STAY" << endl; // implement translation from Direction enum to string!!!
 	return nextStepDirection;

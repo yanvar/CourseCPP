@@ -32,6 +32,8 @@ House::House(const char* path)
     }
 	m_currentMapping = m_origMapping;
 	m_origAccumulatedDirt = getRoomAccumulatedDirt();
+
+	cout << "House /""" << path << "/"" was created!" << endl;
 }
 
 int House::getRoomAccumulatedDirt() const
@@ -50,7 +52,7 @@ int House::getRoomAccumulatedDirt() const
 
 int House::getMaxSteps() const
 {
-	return 0; //TODO**************
+	return m_maxStep; //TODO**************
 }
 
 Direction House::getLastStep(Direction d) const
@@ -59,7 +61,7 @@ Direction House::getLastStep(Direction d) const
 }
  bool House::isOnDockingLocation() const
 {
-	return 0; //TODO**************
+	return true; //TODO**************
 }
 
 
@@ -151,7 +153,7 @@ bool House::isClean() const
 
 bool House::isWall(Direction d) const
 {
-	char c = getCurrentState();
+	char c = getCurrentState();  //TODO !!! should be fixed. location should be updated according to requested direction! E.g. LEFT ==> col+1, UP ==> row -1, etc... (then return compare to W!!
 	return (c == 'W' || c == 'w');
 }
 bool House::isDirty() const

@@ -13,7 +13,7 @@ class Simulation
 {
 public:
 	Simulation(int batteryFullCapacityInSteps, int batteryConsumptionRate, float m_batteryRechargeRate);
-	int algoGrade; // TBD vector vectr
+	int m_algoGrade; // TBD vector vectr
 
 	void addHouse(const char* housePath);
 	void addAlgo(Algo algo);
