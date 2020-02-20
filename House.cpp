@@ -153,7 +153,7 @@ bool House::isClean() const
 
 bool House::isWall(Direction d) const
 {
-	char c = getCurrentState();  //TODO !!! should be fixed. location should be updated according to requested direction! E.g. LEFT ==> col+1, UP ==> row -1, etc... (then return compare to W!!
+	char c = getCurrentState();  //TODO !!! should be fixed. location should be updated according to requested direction! E.g. LEFT ==> col-1, UP ==> row -1, etc... (then return compare to W!!
 	return (c == 'W' || c == 'w');
 }
 bool House::isDirty() const

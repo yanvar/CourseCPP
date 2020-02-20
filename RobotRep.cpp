@@ -1,7 +1,7 @@
 #include "RobotRep.h"
 
 //RobotRep::RobotRep(HouseInterface* house, Battery battery) : m_wallSensor(house)
-RobotRep::RobotRep(HouseInterface* house) : m_wallSensor(house)
+RobotRep::RobotRep(HouseInterface* house) : m_wallSensor(house), m_dirtSensor(house)
 {
 	
 }
@@ -11,16 +11,19 @@ RobotRep::RobotRep(HouseInterface* house) : m_wallSensor(house)
 	return &m_wallSensor;
 }
 
+ DirtSensor* RobotRep::getDirtSensor()
+ {
+	 return &m_dirtSensor;
+ }
+
+
 /*
 bool RobotRep::isWall(Direction d) const
 {
 	return m_houseInstance.isWall(d);
 }
 
-bool RobotRep::isDirty() const
-{
-	return m_houseInstance.isDirty();
-}
+
 
 int RobotRep::stepsLeft() const
 {

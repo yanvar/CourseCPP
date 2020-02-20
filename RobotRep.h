@@ -1,6 +1,7 @@
 #pragma once
 #include "HouseInterface.h"
 #include "WallSensor.h"
+#include "DirtSensor.h"
 #include "House.h"
 #include "Battery.h"
 
@@ -16,8 +17,10 @@ public:
 	// TODO: add 3 functions + implement (call House API)
 
 	 WallSensor* getWallSensor();
+	 DirtSensor* getDirtSensor();
 private:
 	WallSensor m_wallSensor;
+	DirtSensor m_dirtSensor;
 
 /*
 	wallSensor = &(robot.getWallSensor());
