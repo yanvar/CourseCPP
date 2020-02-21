@@ -24,15 +24,14 @@ uint32_t Simulation::runSim()
 	for (auto algoIter : m_allAlgos)
 	{
 		// loop over ALL houses
-		//for (auto houseIter : m_allHouses)
-		for(uint32_t i=0; i<m_allHouses.size();i++)
+		for(auto houseIter: m_allHouses)
 		{
 			Direction lastMove = Direction::STAY;
 			Direction recommendedDirection;
 			
-			auto houseIter = &m_allHouses[i];
+		//	auto houseIter = &m_allHouses[i];
 			bool finish = false;
-			int houseRemainingStepsCntr = houseIter->getMaxSteps();
+			int houseRemainingStepsCntr = houseIter.getMaxSteps();
 
 			// create empty house configuration
 			map<string, int> houseConfig;
@@ -43,7 +42,7 @@ uint32_t Simulation::runSim()
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
-			RobotRep robotRep = RobotRep(houseIter, battery);
+			RobotRep robotRep = RobotRep(&houseIter, battery);
 			//RobotRep robotRep = RobotRep(houseIter);
 
 			algoIter.init(robotRep, houseConfig);
@@ -51,11 +50,11 @@ uint32_t Simulation::runSim()
 			recommendedDirection = algoIter.nextStep(lastMove, finish);
 			while (!finish && houseRemainingStepsCntr)
 			{
-				lastMove = houseIter->updateLastStep(recommendedDirection);
+				lastMove = houseIter.updateLastStep(recommendedDirection);
 				recommendedDirection = algoIter.nextStep(lastMove, finish);
 
 				houseRemainingStepsCntr--;
-				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter->isOnDockingLocation()))
+				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter.isOnDockingLocation()))
 					break;
 			}
 
