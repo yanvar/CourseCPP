@@ -24,20 +24,6 @@ private:
 	DirtSensor m_dirtSensor;
 	Battery m_battery;
 
-/*
-	wallSensor = &(robot.getWallSensor());
-	dirtSensor = &(robot.getDirtSensor());
-	batterySensor = &(robot.getBatterySensor());
-
-	bool isWall(Direction d) const;
-	bool isDirty() const;
-	int stepsLeft() const;
-
-private:
-	HouseInterface* m_houseInstance;
-	Battery m_battery;
-
-*/
 };
 
 

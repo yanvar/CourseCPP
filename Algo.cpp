@@ -22,7 +22,8 @@ Direction Algo::nextStep(Direction lastMove, bool& finish)
 	bool rightSideWall = m_wallSensor->isWall(Direction::RIGHT);
 	bool downSideWall = m_wallSensor->isWall(Direction::DOWN);
 	bool upSideWall = m_wallSensor->isWall(Direction::UP);
-	//bool isClean = m_wallSensor->isWall(Direction::LEFT);
+	bool isClean = m_dirtSensor->isDirty();
+	int stepsLeft = m_batterySensor->stepsLeft();
 
 	cout << "ALGO: nextStep: Next proposed step is - " << DirectionToStr.at(nextStepDirection) << endl;
 	return nextStepDirection;

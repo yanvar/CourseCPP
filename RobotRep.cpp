@@ -21,18 +21,3 @@ Battery* RobotRep::getBattery()
      return &m_battery;
  }
 
-
-/*
-bool RobotRep::isWall(Direction d) const
-{
-	return m_houseInstance.isWall(d);
-}
-
-
-
-int RobotRep::stepsLeft() const
-{
-	return m_battery.getBatteryLevelInSteps();
-}
-
-*/
