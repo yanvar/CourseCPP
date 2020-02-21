@@ -11,22 +11,22 @@
 class Battery : public BatteryInterface
 {
 public:
-	Battery(int initChargeLevelInSteps, unsigned int batteryConsumptionRate, float batteryRechargeRate);
+	Battery(int initChargeLevelInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate);
 
 	// battery measured in "steps" units
-	unsigned int setBatteryLevelInSteps(int stepsToSet);
+	uint32_t setBatteryLevelInSteps(int stepsToSet);
 	bool isBatteryEmpty();
-	unsigned int decrementBatterySingleStep();
-	unsigned int chargeBatteryDuringSingleStep(); // only full steps are count (int)
+	uint32_t decrementBatterySingleStep();
+	uint32_t chargeBatteryDuringSingleStep(); // only full steps are count (int)
 	int stepsLeft() const;
 
 
 private:
 	// all poewr measurements are normalized to single step unit
-	unsigned int m_batteryMaxCapacityInSteps;
-	unsigned int m_initBatteryLevelInSteps;  // asume it is the MAX power capacity allowed
-	unsigned int m_currentBatteryLevelInSteps;
+	uint32_t m_batteryMaxCapacityInSteps;
+	uint32_t m_initBatteryLevelInSteps;  // asume it is the MAX power capacity allowed
+	uint32_t m_currentBatteryLevelInSteps;
 
-	unsigned int m_batteryConsumptionRate;
+	uint32_t m_batteryConsumptionRate;
 	float m_batteryRechargeRate;
 };
