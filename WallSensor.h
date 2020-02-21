@@ -7,7 +7,7 @@
 class WallSensor : public WallSensorInterface
 {
 public:
-	WallSensor(HouseInterface* houseIF);
+	WallSensor(HouseInterface* houseIf);
 	bool isWall(Direction d) const;
 private:
 	HouseInterface* m_houseIf;

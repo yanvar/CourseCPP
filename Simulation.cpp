@@ -40,7 +40,7 @@ uint32_t Simulation::runSim()
 			houseConfig.insert(std::pair<string, int>("Max_Steps", houseRemainingStepsCntr));
 
 	        // create new battery
-			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
+			BatteryInterface battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
 			RobotRep robotRep = RobotRep(houseIter, battery);

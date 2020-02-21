@@ -1,7 +1,8 @@
 #pragma once
+
 #include "Common.h"
 
-class BatteryInterface
+class BatterySensorInterface
 {
 public:
 	virtual int stepsLeft() const = 0;

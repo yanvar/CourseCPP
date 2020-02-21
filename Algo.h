@@ -20,7 +20,7 @@ public:
 
 		m_wallSensor = (robot.getWallSensor());
 		m_dirtSensor = (robot.getDirtSensor());
-		//batterySensor = &(robot.getBatterySensor());
+		m_batterySensor = &(robot.getBatterySensor());
 	}
 
 	Direction nextStep(Direction lastMove, bool& finish);
@@ -60,6 +60,6 @@ protected:
 
 	WallSensor* m_wallSensor = nullptr;
 	DirtSensor* m_dirtSensor = nullptr;
-	//BatterySensor* m_batterySensor = nullptr;
+	BatterySensor* m_batterySensor = nullptr;
 	
 };

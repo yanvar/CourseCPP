@@ -9,7 +9,7 @@ class RobotRep
 {
 
 public:
-	RobotRep(HouseInterface* house, Battery battery);
+	RobotRep(HouseInterface* house, BatteryInterface* battery);
 	//RobotRep(HouseInterface* house);
 
 	//implement all virtual functions of houseIF!
@@ -18,11 +18,11 @@ public:
 
 	 WallSensor* getWallSensor();
 	 DirtSensor* getDirtSensor();
-	 Battery* getBattery();
+	 BatterySensor* getBatterySensor();
 private:
 	WallSensor m_wallSensor;
 	DirtSensor m_dirtSensor;
-	Battery m_battery;
+	BatterySensor m_batterySensor;
 
 /*
 	wallSensor = &(robot.getWallSensor());

@@ -3,7 +3,7 @@
 using namespace std;
 
 
-Battery::Battery(int initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, unsigned int batteryConsumptionRate = D_BATTERY_CONSUMPTION_RATE, float batteryRechargeRate = D_BATTERY_RECHARGE_RATE):
+Battery::Battery(int initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, uint32_t batteryConsumptionRate = D_BATTERY_CONSUMPTION_RATE, float batteryRechargeRate = D_BATTERY_RECHARGE_RATE):
 	m_batteryMaxCapacityInSteps(initChargeLevelInSteps), m_initBatteryLevelInSteps(initChargeLevelInSteps), m_currentBatteryLevelInSteps(initChargeLevelInSteps),
 	m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)
 {
@@ -11,7 +11,7 @@ Battery::Battery(int initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, unsigned int
 }
 
 
-unsigned int Battery::setBatteryLevelInSteps(int batteryLevelToSet)
+uint32_t Battery::setBatteryLevelInSteps(int batteryLevelToSet)
 {
 	m_currentBatteryLevelInSteps = batteryLevelToSet;
 	cout << "BATTERY: Charge Level was set. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
@@ -35,7 +35,7 @@ bool Battery::isBatteryEmpty()
 	return false;
 }
 
-unsigned int Battery::decrementBatterySingleStep()
+uint32_t Battery::decrementBatterySingleStep()
 {
 	if (m_currentBatteryLevelInSteps < m_batteryConsumptionRate)
 		m_currentBatteryLevelInSteps = D_BATTERY_ZERO_ENERGY; // current energy - energy consumed during single robot step (measured in robot steps)
@@ -46,9 +46,9 @@ unsigned int Battery::decrementBatterySingleStep()
 	return m_currentBatteryLevelInSteps;
 }
 
-unsigned int Battery::chargeBatteryDuringSingleStep()
+uint32_t Battery::chargeBatteryDuringSingleStep()
 {
-	m_currentBatteryLevelInSteps += (unsigned int)m_batteryRechargeRate; // current energy + energy added during single charging step (measured in robot steps)
+	m_currentBatteryLevelInSteps += (uint32_t)m_batteryRechargeRate; // current energy + energy added during single charging step (measured in robot steps)
 	if (m_currentBatteryLevelInSteps > m_initBatteryLevelInSteps)
 		m_currentBatteryLevelInSteps = m_initBatteryLevelInSteps;
 
