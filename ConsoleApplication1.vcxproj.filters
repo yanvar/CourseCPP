@@ -48,9 +48,6 @@
     <ClCompile Include="Battery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CleanlinessSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WallSensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,13 +89,10 @@
     <ClInclude Include="Battery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CleanlinessSensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WallSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WallsensorInterface.h">
+    <ClInclude Include="WallSensorInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DirtSensor.h">

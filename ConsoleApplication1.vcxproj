@@ -159,7 +159,6 @@
     <ClCompile Include="RandomAlgo.cpp" />
     <ClCompile Include="RobotRep.cpp" />
     <ClCompile Include="Simulation.cpp" />
-    <ClCompile Include="CleanlinessSensor.cpp" />
     <ClCompile Include="SpiralAlgo.cpp" />
     <ClCompile Include="WallSensor.cpp" />
     <ClCompile Include="WallSensorInterface.cpp" />
@@ -167,7 +166,6 @@
   <ItemGroup>
     <ClInclude Include="Algo.h" />
     <ClInclude Include="BatteryInterface.h" />
-    <ClInclude Include="CleanlinessSensor.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DirtSensor.h" />
     <ClInclude Include="DirtSensorInterface.h" />
@@ -180,7 +178,7 @@
     <ClInclude Include="RobotRep.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="SpiralAlgo.h" />
-    <ClInclude Include="WallsensorInterface.h" />
+    <ClInclude Include="WallSensorInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />
