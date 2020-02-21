@@ -23,7 +23,7 @@ int Battery::stepsLeft() const
 	cout << "BATTERY: Charge Level was checked. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
 	return m_currentBatteryLevelInSteps;
 }
-bool Battery::isBatteryEmpty()
+bool Battery::isBatteryEmpty() const
 {
 	if (m_currentBatteryLevelInSteps == 0)
 	{
@@ -42,7 +42,7 @@ uint32_t Battery::decrementBatterySingleStep()
 	else
 		m_currentBatteryLevelInSteps -= m_batteryConsumptionRate;
 
-	cout << "BATTERY: DecrementBatteryStep. Consumed " << m_batteryConsumptionRate << " steps. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
+//	cout << "BATTERY: DecrementBatteryStep. Consumed " << m_batteryConsumptionRate << " steps. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
 	return m_currentBatteryLevelInSteps;
 }
 
