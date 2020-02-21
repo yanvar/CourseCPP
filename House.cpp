@@ -30,6 +30,12 @@ House::House(const char* path)
 		markFirstAndLastColAsWall();
         myfile.close();
     }
+	else
+	{
+		cout << "Failed to open file " << path << ", existing" << endl;
+		exit(0);
+	}
+	
 	m_currentMapping = m_origMapping;
 	m_origAccumulatedDirt = getRoomAccumulatedDirt();
 
