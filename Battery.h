@@ -15,11 +15,10 @@ public:
 
 	// battery measured in "steps" units
 	uint32_t setBatteryLevelInSteps(int stepsToSet);
-	bool isBatteryEmpty();
+	bool isBatteryEmpty() const;
 	uint32_t decrementBatterySingleStep();
 	uint32_t chargeBatteryDuringSingleStep(); // only full steps are count (int)
 	int stepsLeft() const;
-
 
 private:
 	// all poewr measurements are normalized to single step unit
