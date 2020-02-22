@@ -8,13 +8,13 @@ int main_TODO()
 	std::cout << "Test:" << endl;
 	House h("/home/yanivv/Project/repos/CourseCPP/House1.txt");
 
-	h.printRoom();
+	h.printHouse();
 //	std::cout << "Clean percentege=" << h.getCleanPercentage()<< std::endl;
 
 	
 	std::cout << std::endl;
 	House h2("/home/yanivv/Project/repos/CourseCPP/House2.txt");
-	h2.printRoom();
+	h2.printHouse();
 
 	return 0;
 }

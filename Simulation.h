@@ -19,8 +19,8 @@ public:
 	void addAlgo(Algo algo);
 	uint32_t runSim();
 
-	uint32_t printResults();
-	uint32_t writeResultsToFile();
+	void printResults();
+	void writeResultsToFile();
 
 
 	typedef struct m_singleSimGrade {

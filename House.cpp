@@ -49,7 +49,7 @@ uint32_t House::getRoomAccumulatedDirt() const
 	{
 		if (c > '0' && c <= '9')
 		{
-			accumulatedDirt += c - '0';
+			accumulatedDirt += (c - '0');
 		}
 	}
 	return accumulatedDirt;
@@ -128,18 +128,22 @@ void House::markFirstAndLastColAsWall()
 	
 }
 
-void House::printRoom() const
+void House::printHouse(ostream &resultfile) const
 {
+	std::string output;
 	for (uint32_t i = 0; i < m_rows; i++)
 	{
 		for (uint32_t j = 0; j < m_cols; j++)
 		{
-			cout << m_origMapping[((size_t)m_cols * i) + j];
+			output += (m_currentMapping[((size_t)m_cols * i) + j]);
 		}
-		cout << endl;
+		output += '\n';
 	}
-	cout << "Robot location: " << m_robotLocation.m_currnetRow << " " << m_robotLocation.m_currnetCol << endl;
-	cout << "Room dirt level = " << m_origAccumulatedDirt << endl;
+	output += ("Robot location: " + std::to_string(m_robotLocation.m_currnetRow) +
+				' ' + std::to_string(m_robotLocation.m_currnetCol) + '\n');
+	output += ("Room dirt level = " + std::to_string(m_origAccumulatedDirt) + '\n');
+	
+	resultfile << output;
 }
 
 RobotLocation House::getLocationByDirection(Direction d) const {

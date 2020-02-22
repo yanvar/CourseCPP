@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 
 #include "Common.h"
 class HouseInterface
@@ -13,6 +14,8 @@ public:
 	virtual uint32_t getMaxSteps() const = 0;
 	virtual Direction updateLastStep(Direction d) = 0;
 	virtual bool isOnDockingLocation() const = 0;
+	virtual void printHouse(std::ostream& resultfile) const = 0;
+
 
 };
 

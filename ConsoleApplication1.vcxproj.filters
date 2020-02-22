@@ -33,9 +33,6 @@
     <ClCompile Include="HouseInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RandomAlgo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,13 +45,7 @@
     <ClCompile Include="Battery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CleanlinessSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WallSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WallSensorInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DirtSensor.cpp">
@@ -92,9 +83,6 @@
     <ClInclude Include="Battery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CleanlinessSensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WallSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -114,5 +102,6 @@
   <ItemGroup>
     <Text Include="House1.txt" />
     <Text Include="House2.txt" />
+    <Text Include="Result.txt" />
   </ItemGroup>
 </Project>
