@@ -41,6 +41,7 @@ uint32_t Simulation::runSim()
 			
 		//	auto houseIter = &m_allHouses[i];
 			bool finish = false;
+			// steps allocated for house cleanup
 			int houseRemainingStepsCntr = houseIter.getMaxSteps();
 
 			// create empty house configuration
@@ -57,33 +58,36 @@ uint32_t Simulation::runSim()
 
 			algoIter.init(robotRep, houseConfig);
 			
+			// asume battery created with at lease 1 step energy - no checks
 			recommendedDirection = algoIter.nextStep(lastMove, finish);
+			lastMove = houseIter.updateLastStep(recommendedDirection);
 			updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
 
 			while (!finish && --houseRemainingStepsCntr)
 			{
-				lastMove = houseIter.updateLastStep(recommendedDirection);
 				if ((battery.isBatteryEmpty()) && (!houseIter.isOnDockingLocation()))
 					break;
 				recommendedDirection = algoIter.nextStep(lastMove, finish);
+				lastMove = houseIter.updateLastStep(recommendedDirection);
 				updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
-				//houseRemainingStepsCntr--; // done as part of while condition chek
+				//houseRemainingStepsCntr--; // done as part of while condition check
 			}
 
 			M_SINGLE_SIM_GRADE singleSimGrade;
-
-			//calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
-			updateSimResultsVector(singleSimGrade);
+			float cleanPercentage;
+			cleanPercentage = calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
+			updateResultsVector(singleSimGrade);
+			cout << "Result: Algo - " << " , Hosue - " << endl;
+			cout <<"          Clean% = " << singleSimGrade.cleanGrade << "RemainingSteps = " << singleSimGrade.remainingSteps << endl;
 		}
-		// TODO
-		//calcSingleAgregatedAlgoGrade(simStepsCntr, houseIter, finalRobotLocation, battery, singleSimGrade);
+		//based on cleanPercentage only
+		//calcAgregatedAlgoGrade(Simulation::m_algoHouseSimGrade);
 		//updateSingleAgregatedAlgoGrade(singleSimGrade);
 	}
 
 	//TODO decideBestAlgo();
 	//print ALL !!!
 
-	//TODO
 	return 0;
 }
 
@@ -100,13 +104,14 @@ float Simulation::calcSingleSimGrade(bool finish, uint32_t simStepsCntr, House h
 	else
 	{
 		m_singleSimGrade.cleanGrade = houseIter.getCleanPercentage();
+		if (finish)
 		m_singleSimGrade.remainingSteps = simStepsCntr;
 	}
 
-	return 0; //TODO
+	return m_singleSimGrade.cleanGrade;
 }
 
-void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
+void Simulation::updateResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
 {
 	m_algoHouseSimGrade.push_back(m_singleSimGrade);
 }
@@ -121,6 +126,16 @@ uint32_t Simulation::writeResultsToFile()
 {
 	return 0; //TODO
 }
+
+//float Simulation::calcAgregatedAlgoGrade(vector<M_SINGLE_SIM_GRADE>& m_algoHouseSimGradee);
+//{
+//	float sum = 0.0;
+//
+//	for (auto resultsIter : m_algoHouseSimGradee)
+//		sum += resultsIter.cleanGrade;
+//
+//	return sum / m_algoHouseSimGradee.size();
+//}
 
 /*TODO
 float Simulation::calcSingleSimGrade(bool finish, int simStepsCntr, House houseIter, Battery&, M_SINGLE_SIM_GRADE& m_singleSimGrade)

@@ -30,7 +30,8 @@ public:
 
 
 	float calcSingleSimGrade(bool finish, uint32_t simStepsCntr, House houseIter, Battery& battery, M_SINGLE_SIM_GRADE& m_singleSimGrade);
-	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
+	void updateResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
+	float calcAgregatedAlgoGrade(vector<M_SINGLE_SIM_GRADE>& m_algoHouseSimGradee);
 
 
 	float m_batteryFullCapacityInSteps;
