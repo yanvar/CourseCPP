@@ -4,7 +4,6 @@
 #include <vector>
 #include <iostream>
 
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -45,7 +44,7 @@ public:
 	bool isDirty() const;
 	RobotLocation getLocationByDirection(Direction d) const;
 	void moveRobot(Direction d);
-	void printRoom() const;
+	void printHouse(ostream &myfile = std::cout) const;
 	char& operator()(int row, int col);
 	float getCleanPercentage() const;
 	uint32_t getMaxSteps() const;

@@ -35,8 +35,8 @@ int main()
 
 	sim.runSim();
 
-    //Simulation::printResults();
-    //Simulation::writeResultsToFile();
+    sim.printResults();
+    sim.writeResultsToFile();
 }
 
 

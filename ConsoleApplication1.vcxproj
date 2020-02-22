@@ -155,19 +155,15 @@
     <ClCompile Include="EdgeAlgo.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseInterface.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="RandomAlgo.cpp" />
     <ClCompile Include="RobotRep.cpp" />
     <ClCompile Include="Simulation.cpp" />
-    <ClCompile Include="CleanlinessSensor.cpp" />
     <ClCompile Include="SpiralAlgo.cpp" />
     <ClCompile Include="WallSensor.cpp" />
-    <ClCompile Include="WallSensorInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algo.h" />
     <ClInclude Include="BatteryInterface.h" />
-    <ClInclude Include="CleanlinessSensor.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DirtSensor.h" />
     <ClInclude Include="DirtSensorInterface.h" />
@@ -185,6 +181,7 @@
   <ItemGroup>
     <Text Include="House1.txt" />
     <Text Include="House2.txt" />
+    <Text Include="Result.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -112,14 +112,30 @@ void Simulation::updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade)
 }
 
 
-uint32_t Simulation::printResults()
+void Simulation::printResults()
 {
-	return 0; //TODO
+	// loop over ALL houses
+	for (auto houseIter : m_allHouses)
+	{
+		std::cout << "************" << std::endl;
+		houseIter.printHouse();
+		std::cout << "************" << std::endl;;
+	}
 }
 
-uint32_t Simulation::writeResultsToFile()
+void Simulation::writeResultsToFile()
 {
-	return 0; //TODO
+	ofstream myfile;
+	myfile.open("Result.txt");
+
+	// loop over ALL houses
+	for (auto houseIter : m_allHouses)
+	{
+		myfile << "************" << std::endl;
+		houseIter.printHouse(myfile);
+		myfile << "************" << std::endl;
+	}
+	myfile.close();
 }
 
 /*TODO

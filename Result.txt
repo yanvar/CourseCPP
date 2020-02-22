@@ -1,0 +1,17 @@
+************
+WWWWWWWW
+W560D00W
+WS87W 0W
+WWWWWWWW
+Robot location: 1 4
+Room dirt level = 26
+************
+************
+WWWWWWWW
+W560D00W
+W560W0WW
+WWWWWWWW
+WWWWWWWW
+Robot location: 1 4
+Room dirt level = 22
+************
