@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Simulation::Simulation(uint32_t batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate) :
+Simulation::Simulation(float batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate) :
 	m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)
 {}
 
@@ -16,6 +16,16 @@ void Simulation::addAlgo(Algo algo)
 {
 	//k Algo algo(algo);
 	m_allAlgos.push_back(algo);
+}
+
+int Simulation::updateBatteryChargeLevel(BatteryInterface* battery,  Direction recommendedDir, bool isOnDocking)
+{
+	if (isOnDocking && (recommendedDir == Direction::STAY))
+		battery->chargeBatteryDuringSingleStep();
+	else
+		battery->decrementBatterySingleStep();
+	
+	return battery->stepsLeft();
 }
 
 uint32_t Simulation::runSim()
@@ -41,26 +51,28 @@ uint32_t Simulation::runSim()
 	        // create new battery
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
-			//TODO: create RobotREP object and pass it to init - TOCHECK REF DEFINITION
-			RobotRep robotRep = RobotRep(&houseIter, battery);
-			//RobotRep robotRep = RobotRep(houseIter);
+			// create RobotREP object and pass it to Algo::init
+			//RobotRep robotRep = RobotRep(&houseIter, &battery);
+			RobotRep robotRep = RobotRep(&houseIter);
 
 			algoIter.init(robotRep, houseConfig);
 			
 			recommendedDirection = algoIter.nextStep(lastMove, finish);
-			while (!finish && houseRemainingStepsCntr)
+			updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
+
+			while (!finish && --houseRemainingStepsCntr)
 			{
 				lastMove = houseIter.updateLastStep(recommendedDirection);
-				recommendedDirection = algoIter.nextStep(lastMove, finish);
-
-				houseRemainingStepsCntr--;
-				if ((battery.decrementBatterySingleStep() == 0) && (!houseIter.isOnDockingLocation()))
+				if ((battery.isBatteryEmpty()) && (!houseIter.isOnDockingLocation()))
 					break;
+				recommendedDirection = algoIter.nextStep(lastMove, finish);
+				updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
+				//houseRemainingStepsCntr--; // done as part of while condition chek
 			}
 
 			M_SINGLE_SIM_GRADE singleSimGrade;
 
-			//todo calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
+			//calcSingleSimGrade(finish, houseRemainingStepsCntr, houseIter, battery, singleSimGrade);
 			updateSimResultsVector(singleSimGrade);
 		}
 		// TODO

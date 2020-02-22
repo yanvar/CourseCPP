@@ -63,9 +63,11 @@ uint32_t House::getMaxSteps() const
 Direction House::updateLastStep(Direction recommendedDirection)
 {
 	// to update robot location and house status + return actual step!!! TODO
+	//TODO: check if recommendedDirection!=STAY && !onDocking && ...
 	decreaseDirtCurrentLocation();
+	//TODO: check if not WALL and move only if possible!!! (inside moveRobot)
 	moveRobot(recommendedDirection);
-
+	//TODO: return ACTUAL Direction (it may differ from recommended, in case encounter WALL ==> (it will be STAY)
 	return recommendedDirection; //TODO**************
 }
  bool House::isOnDockingLocation() const

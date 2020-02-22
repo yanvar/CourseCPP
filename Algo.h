@@ -20,7 +20,7 @@ public:
 
 		m_wallSensor = (robot.getWallSensor());
 		m_dirtSensor = (robot.getDirtSensor());
-		m_batterySensor = (robot.getBattery());
+		//m_batterySensor = (robot.getBatterySensor());
 	}
 
 	Direction nextStep(Direction lastMove, bool& finish);
@@ -33,8 +33,10 @@ public:
 	Mode calculateMode();
 
 
-	//void updateMapScan(Direction dir);
-	//void updateCurrentLocation(Direction dir);
+	void updateMapScan(Direction dir);
+	void updateCurrentLocation(Direction dir);
+	void updateSurroundingMapping();
+	Direction calcNextStep(Mode robotMode);
 
 
 private:
@@ -58,8 +60,8 @@ protected:
 
 	uint32_t m_remainingSteps = 0;
 
-	WallSensor* m_wallSensor = nullptr;
-	DirtSensor* m_dirtSensor = nullptr;
-	Battery* m_batterySensor = nullptr;
+	WallSensorInterface* m_wallSensor = nullptr;
+	DirtSensorInterface* m_dirtSensor = nullptr;
+	//BatterySensorInterface* m_batterySensor = nullptr;
 	
 };

@@ -12,7 +12,7 @@
 class Simulation
 {
 public:
-	Simulation(uint32_t batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float m_batteryRechargeRate);
+	Simulation(float batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float m_batteryRechargeRate);
 	//int m_algoGrade; // TBD vector vectr TODO
 
 	void addHouse(const char* housePath);
@@ -33,16 +33,16 @@ public:
 	void updateSimResultsVector(M_SINGLE_SIM_GRADE& m_singleSimGrade);
 
 
-	uint32_t m_batteryFullCapacityInSteps;
+	float m_batteryFullCapacityInSteps;
 	uint32_t m_batteryConsumptionRate;
 	float m_batteryRechargeRate;
 
 private:
 
+	int updateBatteryChargeLevel(BatteryInterface* battery, Direction recommendedDir, bool isOnDocking);
+
 	vector<House> m_allHouses;
 	vector<Algo> m_allAlgos;
-
-
 
 	vector<float> m_algosAgregatedGradeList;
 	vector<M_SINGLE_SIM_GRADE> m_algoHouseSimGrade;

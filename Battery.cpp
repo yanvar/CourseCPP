@@ -3,7 +3,7 @@
 using namespace std;
 
 
-Battery::Battery(int initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, uint32_t batteryConsumptionRate = D_BATTERY_CONSUMPTION_RATE, float batteryRechargeRate = D_BATTERY_RECHARGE_RATE):
+Battery::Battery(float initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, uint32_t batteryConsumptionRate = D_BATTERY_CONSUMPTION_RATE, float batteryRechargeRate = D_BATTERY_RECHARGE_RATE):
 	m_batteryMaxCapacityInSteps(initChargeLevelInSteps), m_initBatteryLevelInSteps(initChargeLevelInSteps), m_currentBatteryLevelInSteps(initChargeLevelInSteps),
 	m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)
 {
@@ -11,7 +11,7 @@ Battery::Battery(int initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, uint32_t bat
 }
 
 
-uint32_t Battery::setBatteryLevelInSteps(int batteryLevelToSet)
+float Battery::setBatteryLevelInSteps(float batteryLevelToSet)
 {
 	m_currentBatteryLevelInSteps = batteryLevelToSet;
 	cout << "BATTERY: Charge Level was set. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
@@ -21,7 +21,7 @@ uint32_t Battery::setBatteryLevelInSteps(int batteryLevelToSet)
 int Battery::stepsLeft() const
 {
 	cout << "BATTERY: Charge Level was checked. CurrentBatteryLevel is - " << m_currentBatteryLevelInSteps << endl;
-	return m_currentBatteryLevelInSteps;
+	return (int)m_currentBatteryLevelInSteps;
 }
 bool Battery::isBatteryEmpty() const
 {
@@ -35,7 +35,7 @@ bool Battery::isBatteryEmpty() const
 	return false;
 }
 
-uint32_t Battery::decrementBatterySingleStep()
+float Battery::decrementBatterySingleStep()
 {
 	if (m_currentBatteryLevelInSteps < m_batteryConsumptionRate)
 		m_currentBatteryLevelInSteps = D_BATTERY_ZERO_ENERGY; // current energy - energy consumed during single robot step (measured in robot steps)
@@ -46,9 +46,9 @@ uint32_t Battery::decrementBatterySingleStep()
 	return m_currentBatteryLevelInSteps;
 }
 
-uint32_t Battery::chargeBatteryDuringSingleStep()
+float Battery::chargeBatteryDuringSingleStep()
 {
-	m_currentBatteryLevelInSteps += (uint32_t)m_batteryRechargeRate; // current energy + energy added during single charging step (measured in robot steps)
+	m_currentBatteryLevelInSteps += m_batteryRechargeRate; // current energy + energy added during single charging step (measured in robot steps)
 	if (m_currentBatteryLevelInSteps > m_initBatteryLevelInSteps)
 		m_currentBatteryLevelInSteps = m_initBatteryLevelInSteps;
 

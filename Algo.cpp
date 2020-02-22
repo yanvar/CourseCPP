@@ -8,6 +8,7 @@ Algo::Algo()
 	std::cout << "ALGO: Constructor: Base class object - Algo was created!" << std::endl;
 }
 
+//template should be implemented in .h file
 //template<class T_RobotRep>
 //void Algo::init(T_RobotRep& robot, std::map<std::string, int> config)
 //{
@@ -17,12 +18,22 @@ Algo::Algo()
 
 Direction Algo::nextStep(Direction lastMove, bool& finish)
 {
+	Mode robotMode;
+	
 	Direction nextStepDirection = Direction::STAY;
-//	bool leftSideWall = m_wallSensor->isWall(Direction::LEFT);
-//	bool rightSideWall = m_wallSensor->isWall(Direction::RIGHT);
-//	bool downSideWall = m_wallSensor->isWall(Direction::DOWN);
-//	bool upSideWall = m_wallSensor->isWall(Direction::UP);
-	//bool isClean = m_wallSensor->isWall(Direction::LEFT);
+	// for testing purposes!
+	bool leftSideWall = m_wallSensor->isWall(Direction::LEFT);
+	bool rightSideWall = m_wallSensor->isWall(Direction::RIGHT);
+	bool downSideWall = m_wallSensor->isWall(Direction::DOWN);
+	bool upSideWall = m_wallSensor->isWall(Direction::UP);
+	bool isClean = m_dirtSensor->isDirty();
+	/*int stepsLeft = mBatterySensor->stepsLeft();*/
+
+	//TODO: next step & Algo! will be implemented next week... 
+	updateCurrentLocation(lastMove); // actual location info.
+	updateSurroundingMapping(); //no energy required! //based on current location //request 4 direction isWall + isClean on current location
+	robotMode = calculateMode(); // BACK if battery level is critical, clean if still have dirt on current location, go to next location based on ALGO in use.
+	nextStepDirection = calcNextStep(robotMode);// calc where to go based on mode, Clean ==> STAY, GO - next to clean, BACK - next to Return
 
 //	cout << "ALGO: nextStep: Next proposed step is - " << DirectionToStr.at(nextStepDirection) << endl;
 	return nextStepDirection;
@@ -63,17 +74,27 @@ uint32_t Algo::calculateChargeRateAndStore()
 }
 
 // decide whether we on GO, RETURN or CHARGE mode
-
 Mode Algo::calculateMode()
 {
 	return Mode::DOCK;
 }
 
-void updateMapScan(Direction dir)
+void  Algo::updateMapScan(Direction dir)
+{
+	
+}
+
+void  Algo::updateSurroundingMapping()
 {
 
 }
-void updateCurrentLocation(Direction dir)
+
+void  Algo::updateCurrentLocation(Direction dir)
 {
 
+}
+
+Direction Algo::calcNextStep(Mode robotMode)
+{
+	return Direction::STAY;
 }
