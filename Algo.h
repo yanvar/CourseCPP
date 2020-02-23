@@ -20,7 +20,7 @@ public:
 
 		m_wallSensor = &(robot.getWallSensor());
 		m_dirtSensor = &(robot.getDirtSensor());
-		//m_batterySensor = (robot.getBatterySensor());
+		m_batterySensor = &(robot.getBatterySensor());
 	}
 
 	Direction nextStep(Direction lastMove, bool& finish);
@@ -60,8 +60,8 @@ protected:
 
 	uint32_t m_remainingSteps = 0;
 
-	const WallSensor *m_wallSensor;
-	const DirtSensorInterface* m_dirtSensor;
-	//BatterySensorInterface* m_batterySensor = nullptr;
+	const WallSensor *m_wallSensor = nullptr;
+	const DirtSensorInterface* m_dirtSensor = nullptr;
+	const BatterySensorInterface* m_batterySensor = nullptr;
 	
 };
