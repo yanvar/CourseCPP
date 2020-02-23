@@ -58,19 +58,19 @@ uint32_t Simulation::runSim()
 
 			algoIter.init(robotRep, houseConfig);
 			
-			// asume battery created with at lease 1 step energy - no checks
-			recommendedDirection = algoIter.nextStep(lastMove, finish);
-			lastMove = houseIter.updateLastStep(recommendedDirection);
-			updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
+			//// asume battery created with at lease 1 step energy - no checks
+			//recommendedDirection = algoIter.nextStep(lastMove, finish);
+			//lastMove = houseIter.updateLastStep(recommendedDirection);
+			//updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
 
-			while (!finish && --houseRemainingStepsCntr)
+			while (!finish && houseRemainingStepsCntr)
 			{
 				if ((battery.isBatteryEmpty()) && (!houseIter.isOnDockingLocation()))
 					break;
 				recommendedDirection = algoIter.nextStep(lastMove, finish);
 				lastMove = houseIter.updateLastStep(recommendedDirection);
 				updateBatteryChargeLevel(&battery, recommendedDirection, houseIter.isOnDockingLocation());
-				//houseRemainingStepsCntr--; // done as part of while condition check
+				houseRemainingStepsCntr--; 
 			}
 
 			M_SINGLE_SIM_GRADE singleSimGrade;
