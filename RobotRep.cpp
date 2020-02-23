@@ -6,14 +6,14 @@ RobotRep::RobotRep(HouseInterface* house) : m_wallSensor(house), m_dirtSensor(ho
 	
 }
 
- WallSensorInterface* RobotRep::getWallSensor()
+const WallSensor& RobotRep::getWallSensor() const
 {
-	return &m_wallSensor;
+	return m_wallSensor;
 }
 
- DirtSensorInterface* RobotRep::getDirtSensor()
+const DirtSensor& RobotRep::getDirtSensor() const
  {
-	 return &m_dirtSensor;
+	 return m_dirtSensor;
  }
 
 //BatterySensorInterface* RobotRep::getBatterySensor()

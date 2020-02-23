@@ -18,8 +18,8 @@ public:
 	{
 		m_remainingSteps = config["Max_Steps"];
 
-		m_wallSensor = (robot.getWallSensor());
-		m_dirtSensor = (robot.getDirtSensor());
+		m_wallSensor = &(robot.getWallSensor());
+		m_dirtSensor = &(robot.getDirtSensor());
 		//m_batterySensor = (robot.getBatterySensor());
 	}
 
@@ -60,8 +60,8 @@ protected:
 
 	uint32_t m_remainingSteps = 0;
 
-	WallSensorInterface* m_wallSensor = nullptr;
-	DirtSensorInterface* m_dirtSensor = nullptr;
+	const WallSensor *m_wallSensor;
+	const DirtSensorInterface* m_dirtSensor;
 	//BatterySensorInterface* m_batterySensor = nullptr;
 	
 };

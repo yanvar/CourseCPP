@@ -17,9 +17,14 @@ public:
 
 	//TODO: implement all virtual functions of houseIF!
 
-	 WallSensorInterface* getWallSensor();
-	 DirtSensorInterface* getDirtSensor();
+	 //WallSensorInterface* getWallSensor();
+	 //DirtSensorInterface* getDirtSensor();
 	 //BatterySensorInterface* getBatterySensor();
+
+	 const WallSensor& getWallSensor() const;
+	 const DirtSensor& getDirtSensor() const;
+	 //const BatterySensor& getBatterySensor() const;
+
 private:
 	WallSensor m_wallSensor;
 	DirtSensor m_dirtSensor;
