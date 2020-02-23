@@ -12,23 +12,16 @@ class RobotRep
 {
 
 public:
-	//RobotRep(HouseInterface* house, BatteryInterface* battery);
-	RobotRep(HouseInterface* house/*, BatteryInterface* battery*/);
-
-	//TODO: implement all virtual functions of houseIF!
-
-	 //WallSensorInterface* getWallSensor();
-	 //DirtSensorInterface* getDirtSensor();
-	 //BatterySensorInterface* getBatterySensor();
+	RobotRep(HouseInterface* house, BatteryInterface* battery);
 
 	 const WallSensor& getWallSensor() const;
 	 const DirtSensor& getDirtSensor() const;
-	 //const BatterySensor& getBatterySensor() const;
+	 const BatterySensor& getBatterySensor() const;
 
 private:
 	WallSensor m_wallSensor;
 	DirtSensor m_dirtSensor;
-	//BatterySensor m_batterySensor;
+	BatterySensor m_batterySensor;
 };
 
 

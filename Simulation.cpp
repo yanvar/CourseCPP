@@ -53,8 +53,7 @@ uint32_t Simulation::runSim()
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			// create RobotREP object and pass it to Algo::init
-			//RobotRep robotRep = RobotRep(&houseIter, &battery);
-			RobotRep robotRep = RobotRep(&houseIter);
+			RobotRep robotRep = RobotRep(&houseIter, &battery);
 
 			algoIter.init(robotRep, houseConfig);
 			

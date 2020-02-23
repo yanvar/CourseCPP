@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Algo.cpp" />
     <ClCompile Include="Battery.cpp" />
+    <ClCompile Include="BatterySensor.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
     <ClCompile Include="DirtSensor.cpp" />
     <ClCompile Include="EdgeAlgo.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Algo.h" />
     <ClInclude Include="BatteryInterface.h" />
+    <ClInclude Include="BatterySensor.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DirtSensor.h" />
     <ClInclude Include="DirtSensorInterface.h" />
