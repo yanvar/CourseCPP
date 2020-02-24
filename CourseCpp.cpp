@@ -30,8 +30,8 @@ int main()
     sim.addHouse("House2.txt");
 	//k sim.addHouse(housePath2);
 
-	sim.addAlgo(algo1);
-	sim.addAlgo(algo2);
+	sim.addAlgo(&algo1);
+	sim.addAlgo(&algo2);
 
 	sim.runSim();
 

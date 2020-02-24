@@ -43,7 +43,6 @@ public:
 	bool isWall(Direction d) const;
 	bool isDirty() const;
 	RobotLocation getLocationByDirection(Direction d) const;
-	void moveRobot(Direction d);
 	void printHouse(ostream &myfile = std::cout) const;
 	char& operator()(int row, int col);
 	float getCleanPercentage() const;
@@ -66,7 +65,7 @@ private:
 	void markFirstAndLastColAsWall();
 	void fillHouseContent( ifstream& myfile);
 	uint32_t getRoomAccumulatedDirt() const;
-	
+	Direction moveRobot(Direction d);
 };
 
 

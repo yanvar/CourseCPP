@@ -23,7 +23,7 @@ public:
 		m_batterySensor = &(robot.getBatterySensor());
 	}
 
-	Direction nextStep(Direction lastMove, bool& finish);
+	virtual Direction nextStep(Direction lastMove, bool& finish) = 0;
 	const std::string& getName() const;
 	const std::string& getDescription() const;
 
