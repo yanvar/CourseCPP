@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Algo.h"
+#include "RobotAlgorithm.h"
 #include <iostream>
 
 
-class EdgeAlgo : public Algo
+class EdgeAlgo : public RobotAlgorithm
 {
 
 public:

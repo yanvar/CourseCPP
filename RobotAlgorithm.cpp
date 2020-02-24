@@ -1,9 +1,9 @@
-#include "Algo.h"
+#include "RobotAlgorithm.h"
 
 using namespace std;
 
 
-Algo::Algo()
+RobotAlgorithm::RobotAlgorithm()
 {
 	std::cout << "ALGO: Constructor: Base class object - Algo was created!" << std::endl;
 }
@@ -16,7 +16,7 @@ Algo::Algo()
 //	m_robotRep = robot;
 //}
 
-Direction Algo::nextStep(Direction lastMove, bool& finish)
+Direction RobotAlgorithm::nextStep(Direction lastMove, bool& finish)
 {
 	Mode robotMode;
 	
@@ -39,62 +39,62 @@ Direction Algo::nextStep(Direction lastMove, bool& finish)
 	return nextStepDirection;
 }
 
-const string& Algo::getName() const
+const string& RobotAlgorithm::getName() const
 {
 	return m_algoName;
 }
 
 
-const string& Algo::getDescription() const
+const string& RobotAlgorithm::getDescription() const
 {
 	return m_algoDescription;
 }
 
 
-const uint32_t Algo::getRemainingSteps()
+const uint32_t RobotAlgorithm::getRemainingSteps()
 {
 	return m_remainingSteps;
 }
 
 
-void Algo::decrementRemainingStep()
+void RobotAlgorithm::decrementRemainingStep()
 {
 	m_remainingSteps--;
 }
 
-uint32_t Algo::calculateOptimalStepsToCharge()
+uint32_t RobotAlgorithm::calculateOptimalStepsToCharge()
 {
 	return 0;
 }
 
 
-uint32_t Algo::calculateChargeRateAndStore()
+uint32_t RobotAlgorithm::calculateChargeRateAndStore()
 {
 	return 0;
 }
 
 // decide whether we on GO, RETURN or CHARGE mode
-Mode Algo::calculateMode()
+Mode RobotAlgorithm::calculateMode()
 {
 	return Mode::DOCK;
 }
 
-void  Algo::updateMapScan(Direction dir)
+void  RobotAlgorithm::updateMapScan(Direction dir)
 {
 	
 }
 
-void  Algo::updateSurroundingMapping()
+void  RobotAlgorithm::updateSurroundingMapping()
 {
 
 }
 
-void  Algo::updateCurrentLocation(Direction dir)
+void  RobotAlgorithm::updateCurrentLocation(Direction dir)
 {
 
 }
 
-Direction Algo::calcNextStep(Mode robotMode)
+Direction RobotAlgorithm::calcNextStep(Mode robotMode)
 {
 	return Direction::STAY;
 }

@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Algo.cpp" />
+    <ClCompile Include="RobotAlgorithm.cpp" />
     <ClCompile Include="Battery.cpp" />
     <ClCompile Include="BatterySensor.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
@@ -157,13 +157,13 @@
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseInterface.cpp" />
     <ClCompile Include="RandomAlgo.cpp" />
-    <ClCompile Include="RobotRep.cpp" />
+    <ClCompile Include="RobotRepImpl.cpp" />
     <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="SpiralAlgo.cpp" />
     <ClCompile Include="WallSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Algo.h" />
+    <ClInclude Include="RobotAlgorithm.h" />
     <ClInclude Include="BatteryInterface.h" />
     <ClInclude Include="BatterySensor.h" />
     <ClInclude Include="Common.h" />
@@ -175,7 +175,7 @@
     <ClInclude Include="House.h" />
     <ClInclude Include="HouseInterface.h" />
     <ClInclude Include="RandomAlgo.h" />
-    <ClInclude Include="RobotRep.h" />
+    <ClInclude Include="RobotRepImpl.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="SpiralAlgo.h" />
     <ClInclude Include="WallsensorInterface.h" />

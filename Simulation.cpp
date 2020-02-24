@@ -12,7 +12,7 @@ void Simulation::addHouse(const char * housePath)
 	m_allHouses.push_back(house);
 }
 
-void Simulation::addAlgo(Algo *algo)
+void Simulation::addAlgo(RobotAlgorithm* algo)
 {
 	//k Algo algo(algo);
 	m_allAlgos.push_back(algo);
@@ -53,9 +53,9 @@ uint32_t Simulation::runSim()
 			Battery battery(m_batteryFullCapacityInSteps, m_batteryConsumptionRate, m_batteryRechargeRate);
 			
 			// create RobotREP object and pass it to Algo::init
-			RobotRep robotRep = RobotRep(&houseIter, &battery);
+			RobotRepImpl robotRepImpl = RobotRepImpl(&houseIter, &battery);
 
-			algoIter->init(robotRep, houseConfig);
+			algoIter->init(robotRepImpl, houseConfig);
 			
 			//// asume battery created with at lease 1 step energy - no checks
 			//recommendedDirection = algoIter.nextStep(lastMove, finish);

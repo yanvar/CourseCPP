@@ -8,11 +8,11 @@
 #include "House.h"
 #include "Battery.h"
 
-class RobotRep
+class RobotRepImpl
 {
 
 public:
-	RobotRep(HouseInterface* house, BatteryInterface* battery);
+	RobotRepImpl(HouseInterface* house, BatteryInterface* battery);
 
 	 const WallSensor& getWallSensor() const;
 	 const DirtSensor& getDirtSensor() const;

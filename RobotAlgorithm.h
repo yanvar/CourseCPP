@@ -4,17 +4,17 @@
 #include <map>
 
 #include "Common.h"
-#include "RobotRep.h"
+#include "RobotRepImpl.h"
 
 
-class Algo
+class RobotAlgorithm
 {
 	
 public:
-	Algo();
+	RobotAlgorithm();
 
-	template<typename T_RobotRep>
-	void init(T_RobotRep& robot, std::map<std::string, int> config)
+	template<typename RobotRep>
+	void init(RobotRep& robot, std::map<std::string, int> config)
 	{
 		m_remainingSteps = config["Max_Steps"];
 
