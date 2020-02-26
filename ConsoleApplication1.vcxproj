@@ -148,10 +148,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RobotAlgorithm.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
-    <ClCompile Include="EdgeAlgo.cpp" />
-    <ClCompile Include="RandomAlgo.cpp" />
+    <ClCompile Include="Robotalgo\EdgeAlgo.cpp" />
+    <ClCompile Include="Robotalgo\RandomAlgo.cpp" />
+    <ClCompile Include="Robotalgo\RobotAlgorithm.cpp" />
+    <ClCompile Include="Robotalgo\SpiralAlgo.cpp" />
     <ClCompile Include="Simulation\Battery.cpp" />
     <ClCompile Include="Simulation\BatterySensor.cpp" />
     <ClCompile Include="Simulation\DirtSensor.cpp" />
@@ -159,13 +160,13 @@
     <ClCompile Include="Simulation\RobotRepImpl.cpp" />
     <ClCompile Include="Simulation\Simulation.cpp" />
     <ClCompile Include="Simulation\WallSensor.cpp" />
-    <ClCompile Include="SpiralAlgo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Common.h" />
-    <ClInclude Include="RobotAlgorithm.h" />
-    <ClInclude Include="EdgeAlgo.h" />
-    <ClInclude Include="RandomAlgo.h" />
+    <ClInclude Include="Robotalgo\EdgeAlgo.h" />
+    <ClInclude Include="Robotalgo\RandomAlgo.h" />
+    <ClInclude Include="Robotalgo\RobotAlgorithm.h" />
+    <ClInclude Include="Robotalgo\SpiralAlgo.h" />
     <ClInclude Include="Simulation\Battery.h" />
     <ClInclude Include="Simulation\BatteryInterface.h" />
     <ClInclude Include="Simulation\BatterySensor.h" />
@@ -178,7 +179,6 @@
     <ClInclude Include="Simulation\Simulation.h" />
     <ClInclude Include="Simulation\WallSensor.h" />
     <ClInclude Include="Simulation\WallsensorInterface.h" />
-    <ClInclude Include="SpiralAlgo.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />

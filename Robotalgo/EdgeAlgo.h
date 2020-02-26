@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-class EdgeAlgo : public RobotAlgorithm
+class EdgeAlgo : public robotalgo::RobotAlgorithm
 {
 
 public:

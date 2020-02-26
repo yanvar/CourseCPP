@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-class SpiralAlgo : public RobotAlgorithm
+class SpiralAlgo : public robotalgo::RobotAlgorithm
 {
 
 public:

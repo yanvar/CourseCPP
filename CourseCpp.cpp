@@ -5,9 +5,9 @@
 #include <vector>
 
 #include "Simulation\Simulation.h"
-#include "RandomAlgo.h"
-#include "SpiralAlgo.h"
-#include "EdgeAlgo.h"
+#include "Robotalgo\RandomAlgo.h"
+#include "Robotalgo\SpiralAlgo.h"
+#include "Robotalgo\EdgeAlgo.h"
 
 #define D_BATTERY_FULL_CAPACITY         (150)
 #define D_BATTERY_CONSUMPTION_STEP_RATE (1)
@@ -15,6 +15,7 @@
 
 using namespace std;
 using namespace simulation;
+using namespace robotalgo;
 
 int main()
 {

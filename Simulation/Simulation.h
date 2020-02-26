@@ -5,7 +5,7 @@
 
 #include "..\Common\Common.h"
 #include "House.h"
-#include "..\RobotAlgorithm.h"
+#include "..\Robotalgo\RobotAlgorithm.h"
 #include "Battery.h"
 #include "RobotRepImpl.h"
 
@@ -18,7 +18,7 @@ namespace simulation
 		//int m_algoGrade; // TBD vector vectr TODO
 
 		void addHouse(const char* housePath);
-		void addAlgo(RobotAlgorithm* algo);
+		void addAlgo(robotalgo::RobotAlgorithm* algo);
 		uint32_t runSim();
 
 		void printResults();
@@ -45,7 +45,7 @@ namespace simulation
 		int updateBatteryChargeLevel(BatteryInterface* battery, common::Direction recommendedDir, bool isOnDocking);
 
 		vector<House> m_allHouses;
-		vector<RobotAlgorithm* > m_allAlgos;
+		vector<robotalgo::RobotAlgorithm* > m_allAlgos;
 
 		vector<float> m_algosAgregatedGradeList;
 		vector<M_SINGLE_SIM_GRADE> m_algoHouseSimGrade;
