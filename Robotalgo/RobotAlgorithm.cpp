@@ -101,3 +101,13 @@ Direction RobotAlgorithm::calcNextStep(Mode robotMode)
 	return Direction::STAY;
 }
 
+
+bool RobotAlgorithm::addNewCell()
+{
+	return true;
+}
+
+bool RobotAlgorithm::isCellExist()
+{
+	return true;
+}
