@@ -1,6 +1,7 @@
 #include "Simulation.h"
 
 using namespace std;
+using namespace common;
 
 Simulation::Simulation(float batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate) :
 	m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)

@@ -1,5 +1,7 @@
 #include "EdgeAlgo.h"
 
+using namespace common;
+
 EdgeAlgo::EdgeAlgo()
 {
 	std::cout << "EdgeALGO: Constructor: Base class object - EdgeAlgo was created!" << std::endl;

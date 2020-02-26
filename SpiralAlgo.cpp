@@ -1,5 +1,7 @@
 #include "SpiralAlgo.h"
 
+using namespace common;
+
 SpiralAlgo::SpiralAlgo()
 {
 	std::cout << "SpiralALGO: Constructor: Base class object - SpiralAlgo was created!" << std::endl;

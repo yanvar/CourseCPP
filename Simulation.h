@@ -3,7 +3,7 @@
 #include <vector>
 #include <map> 
 
-#include "Common.h"
+#include "Common\Common.h"
 #include "House.h"
 #include "RobotAlgorithm.h"
 #include "Battery.h"
@@ -40,7 +40,7 @@ public:
 
 private:
 
-	int updateBatteryChargeLevel(BatteryInterface* battery, Direction recommendedDir, bool isOnDocking);
+	int updateBatteryChargeLevel(BatteryInterface* battery, common::Direction recommendedDir, bool isOnDocking);
 
 	vector<House> m_allHouses;
 	vector<RobotAlgorithm* > m_allAlgos;

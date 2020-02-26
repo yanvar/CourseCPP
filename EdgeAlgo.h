@@ -9,5 +9,5 @@ class EdgeAlgo : public RobotAlgorithm
 
 public:
 	EdgeAlgo();
-	Direction nextStep(Direction lastMove, bool& finish);
+	common::Direction nextStep(common::Direction lastMove, bool& finish);
 };

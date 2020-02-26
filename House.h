@@ -1,5 +1,5 @@
 #pragma once
-#include "Common.h"
+#include "Common\Common.h"
 #include "HouseInterface.h"
 #include <vector>
 #include <iostream>
@@ -40,14 +40,14 @@ class House : public HouseInterface
 public:
 	House(const char* path);
 	bool isClean() const;
-	bool isWall(Direction d) const;
+	bool isWall(common::Direction d) const;
 	bool isDirty() const;
-	RobotLocation getLocationByDirection(Direction d) const;
+	RobotLocation getLocationByDirection(common::Direction d) const;
 	void printHouse(ostream &myfile = std::cout) const;
 	char& operator()(int row, int col);
 	float getCleanPercentage() const;
 	uint32_t getMaxSteps() const;
-	Direction updateLastStep(Direction d);
+	common::Direction updateLastStep(common::Direction d);
 	bool isOnDockingLocation() const;
 
 private:
@@ -57,15 +57,15 @@ private:
 	RobotLocation m_robotLocation, m_dockingRobotLocation;
 	uint32_t m_origAccumulatedDirt = 0;
 
-	uint32_t getVectorLocation(Direction d) const;
-	char getCurrentState(Direction d) const;
+	uint32_t getVectorLocation(common::Direction d) const;
+	char getCurrentState(common::Direction d) const;
 	void decreaseDirtCurrentLocation();
 	void markAllAsWall();
 	void markLastRawAsWall();
 	void markFirstAndLastColAsWall();
 	void fillHouseContent( ifstream& myfile);
 	uint32_t getRoomAccumulatedDirt() const;
-	Direction moveRobot(Direction d);
+	common::Direction moveRobot(common::Direction d);
 };
 
 

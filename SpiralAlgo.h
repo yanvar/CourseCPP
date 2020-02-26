@@ -9,6 +9,6 @@ class SpiralAlgo : public RobotAlgorithm
 
 public:
 	SpiralAlgo();
-	Direction nextStep(Direction lastMove, bool& finish);
+	common::Direction nextStep(common::Direction lastMove, bool& finish);
 
 };

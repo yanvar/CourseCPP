@@ -1,8 +1,8 @@
 #pragma once
-#include "Common.h"
+#include "Common\Common.h"
 
 class WallSensorInterface
 {
 public:
-	virtual bool isWall(Direction d) const = 0;
+	virtual bool isWall(common::Direction d) const = 0;
 };

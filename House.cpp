@@ -6,9 +6,10 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
-#include "Common.h"
+#include "Common\Common.h"
 
 using namespace std;
+using namespace common;
 
 House::House(const char* path)
 {

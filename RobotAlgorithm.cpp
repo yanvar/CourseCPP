@@ -1,6 +1,7 @@
 #include "RobotAlgorithm.h"
 
 using namespace std;
+using namespace common;
 
 
 RobotAlgorithm::RobotAlgorithm()

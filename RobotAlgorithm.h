@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 
-#include "Common.h"
+#include "Common\Common.h"
 #include "RobotRepImpl.h"
 
 
@@ -23,20 +23,20 @@ public:
 		m_batterySensor = &(robot.getBatterySensor());
 	}
 
-	virtual Direction nextStep(Direction lastMove, bool& finish) = 0;
+	virtual common::Direction nextStep(common::Direction lastMove, bool& finish) = 0;
 	const std::string& getName() const;
 	const std::string& getDescription() const;
 
 	uint32_t calculateOptimalStepsToCharge();
 	uint32_t calculateChargeRateAndStore();
 	// decide whether we on GO, RETURN or CHARGE mode
-	Mode calculateMode();
+	common::Mode calculateMode();
 
 
-	void updateMapScan(Direction dir);
-	void updateCurrentLocation(Direction dir);
+	void updateMapScan(common::Direction dir);
+	void updateCurrentLocation(common::Direction dir);
 	void updateSurroundingMapping();
-	Direction calcNextStep(Mode robotMode);
+	common::Direction calcNextStep(common::Mode robotMode);
 
 
 private:
