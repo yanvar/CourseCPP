@@ -11,10 +11,10 @@ namespace simulation
 	{
 	public:
 		//k1 DirtSensor(HouseInterface* houseIf);
-		DirtSensor(House* houseIf);
+		DirtSensor(House* house);
 		bool isDirty() const;
 	private:
 		//k1 HouseInterface* m_houseIf;
-		House* m_houseIf;
+		House* m_house;
 	};
 }

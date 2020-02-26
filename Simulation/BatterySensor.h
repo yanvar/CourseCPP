@@ -14,10 +14,10 @@ namespace simulation
 	{
 	public:
 		//k1 BatterySensor(BatteryInterface* batteryIf);
-		BatterySensor(Battery* batteryIf);
+		BatterySensor(Battery* battery);
 		int stepsLeft() const;
 	private:
 		//k1 BatteryInterface* m_batteryIf;
-		Battery* m_batteryIf;
+		Battery* m_battery;
 	};
 }

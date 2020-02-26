@@ -3,10 +3,11 @@
 using namespace simulation;
 
 //k1 WallSensor::WallSensor(HouseInterface* houseIf) : m_houseIf(houseIf)
-WallSensor::WallSensor(House* houseIf) : m_houseIf(houseIf)
+WallSensor::WallSensor(House* house) : m_house(house)
 {}
 
 bool WallSensor::isWall(common::Direction d) const
 {
-	return m_houseIf->isWall(d);
+	//k1 return m_houseIf->isWall(d);
+	return m_house->isWall(d);
 }

@@ -12,10 +12,10 @@ namespace simulation
 	{
 	public:
 		//k1 WallSensor(HouseInterface* houseIF);
-		WallSensor(House* houseIF);
+		WallSensor(House* house);
 		bool isWall(common::Direction d) const;
 	private:
 		//k1 HouseInterface* m_houseIf;
-		House* m_houseIf;
+		House* m_house;
 	};
 }
