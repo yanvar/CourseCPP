@@ -17,7 +17,7 @@ using namespace std;
 using namespace simulation;
 using namespace robotalgo;
 
-int main()
+int main1()
 {
     //k string housePath1 = "House1.txt"; // path depends on PC (should be switched to relative path c_str(); to try
     //k string housePath2 = "House2.txt";
@@ -38,6 +38,8 @@ int main()
 
     sim.printResults();
     sim.writeResultsToFile();
+
+    return 0;
 }
 
 

@@ -14,6 +14,7 @@ namespace simulation
 	class Simulation
 	{
 	public:
+		Simulation() = delete;
 		Simulation(float batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float m_batteryRechargeRate);
 		//int m_algoGrade; // TBD vector vectr TODO
 
