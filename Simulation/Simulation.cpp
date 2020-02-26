@@ -21,7 +21,8 @@ void Simulation::addAlgo(RobotAlgorithm* algo)
 	m_allAlgos.push_back(algo);
 }
 
-int Simulation::updateBatteryChargeLevel(BatteryInterface* battery,  Direction recommendedDir, bool isOnDocking)
+//k1 int Simulation::updateBatteryChargeLevel(BatteryInterface* battery,  Direction recommendedDir, bool isOnDocking)
+int Simulation::updateBatteryChargeLevel(Battery* battery, Direction recommendedDir, bool isOnDocking)
 {
 	if (isOnDocking && (recommendedDir == Direction::STAY))
 		battery->chargeBatteryDuringSingleStep();

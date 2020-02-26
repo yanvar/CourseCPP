@@ -1,5 +1,6 @@
 #pragma once
-#include "BatteryInterface.h"
+//k1 #include "BatteryInterface.h"
+#include "Battery.h"
 
 #include <iostream>
 
@@ -11,7 +12,8 @@
 namespace simulation
 {
 
-	class Battery : public BatteryInterface
+	//k1 class Battery : public BatteryInterface
+	class Battery
 	{
 	public:
 		Battery(float initChargeLevelInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate);

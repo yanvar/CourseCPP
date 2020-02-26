@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <iterator>
 #include "..\Common\Common.h"
-#include "HouseInterface.h"
+//#include "HouseInterface.h"
 
 using namespace std;
 namespace simulation
@@ -37,7 +37,8 @@ namespace simulation
 
 	};
 
-	class House : public HouseInterface
+	//class House : public HouseInterface
+	class House
 	{
 	public:
 		House(const char* path);

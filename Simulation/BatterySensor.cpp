@@ -2,7 +2,8 @@
 
 using namespace simulation;
 
-BatterySensor::BatterySensor(BatteryInterface* batteryIf) : m_batteryIf(batteryIf)
+//k1 BatterySensor::BatterySensor(BatteryInterface* batteryIf) : m_batteryIf(batteryIf)
+BatterySensor::BatterySensor(Battery* batteryIf) : m_batteryIf(batteryIf)
 {}
 
 int BatterySensor::stepsLeft() const

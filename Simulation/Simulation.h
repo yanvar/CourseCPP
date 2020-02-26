@@ -42,7 +42,8 @@ namespace simulation
 
 	private:
 
-		int updateBatteryChargeLevel(BatteryInterface* battery, common::Direction recommendedDir, bool isOnDocking);
+		//k1 int updateBatteryChargeLevel(BatteryInterface* battery, common::Direction recommendedDir, bool isOnDocking);
+		int updateBatteryChargeLevel(Battery* battery, common::Direction recommendedDir, bool isOnDocking);
 
 		vector<House> m_allHouses;
 		vector<robotalgo::RobotAlgorithm* > m_allAlgos;

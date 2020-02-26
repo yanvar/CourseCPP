@@ -1,7 +1,8 @@
 #pragma once
 
 #include "DirtSensorInterface.h"
-#include "HouseInterface.h"
+//k1 #include "HouseInterface.h"
+#include "House.h"
 #include "..\Common\Common.h"
 
 namespace simulation
@@ -9,9 +10,11 @@ namespace simulation
 	class DirtSensor : public DirtSensorInterface
 	{
 	public:
-		DirtSensor(HouseInterface* houseIf);
+		//k1 DirtSensor(HouseInterface* houseIf);
+		DirtSensor(House* houseIf);
 		bool isDirty() const;
 	private:
-		HouseInterface* m_houseIf;
+		//k1 HouseInterface* m_houseIf;
+		House* m_houseIf;
 	};
 }
