@@ -3,12 +3,18 @@
 #include "RobotAlgorithm.h"
 #include <iostream>
 
-
-class SpiralAlgo : public robotalgo::RobotAlgorithm
+namespace robotalgo
 {
 
-public:
-	SpiralAlgo();
-	common::Direction nextStep(common::Direction lastMove, bool& finish);
+	class SpiralAlgo : public robotalgo::RobotAlgorithm
+	{
 
-};
+	public:
+		SpiralAlgo();
+		common::Direction nextStep(common::Direction lastMove, bool& finish);
+
+		virtual const std::string& getName() const override;
+		virtual const std::string& getDescription() const override;
+
+	};
+}

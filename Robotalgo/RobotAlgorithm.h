@@ -26,26 +26,23 @@ namespace robotalgo
 		}
 
 		virtual common::Direction nextStep(common::Direction lastMove, bool& finish) = 0;
-		const std::string& getName() const;
-		const std::string& getDescription() const;
+		virtual const std::string& getName() const= 0;
+		virtual const std::string& getDescription() const = 0;
 
 		uint32_t calculateOptimalStepsToCharge();
 		uint32_t calculateChargeRateAndStore();
 		// decide whether we on GO, RETURN or CHARGE mode
 		common::Mode calculateMode();
 
+	protected:
+		std::string m_algoName;
+		std::string m_algoDescription;
 
 		void updateMapScan(common::Direction dir);
 		void updateCurrentLocation(common::Direction dir);
 		void updateSurroundingMapping();
 		common::Direction calcNextStep(common::Mode robotMode);
 
-
-	private:
-
-	protected:
-		std::string m_algoName;
-		std::string m_algoDescription;
 		struct currentPosition {
 			uint32_t x = 0;
 			uint32_t y = 0;

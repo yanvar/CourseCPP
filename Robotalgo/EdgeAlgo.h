@@ -3,11 +3,16 @@
 #include "RobotAlgorithm.h"
 #include <iostream>
 
-
-class EdgeAlgo : public robotalgo::RobotAlgorithm
+namespace robotalgo
 {
 
-public:
-	EdgeAlgo();
-	common::Direction nextStep(common::Direction lastMove, bool& finish);
-};
+	class EdgeAlgo : public robotalgo::RobotAlgorithm
+	{
+
+	public:
+		EdgeAlgo();
+		common::Direction nextStep(common::Direction lastMove, bool& finish);
+		virtual const std::string& getName() const override;
+		virtual const std::string& getDescription() const override;
+	};
+}
