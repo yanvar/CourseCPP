@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Common.h" />
+    <ClInclude Include="Robotalgo\CellInfo.h" />
     <ClInclude Include="Robotalgo\EdgeAlgo.h" />
     <ClInclude Include="Robotalgo\RandomAlgo.h" />
     <ClInclude Include="Robotalgo\RobotAlgorithm.h" />
