@@ -4,7 +4,7 @@
 #include <map>
 
 #include "Common\Common.h"
-#include "RobotRepImpl.h"
+#include "Simulation\RobotRepImpl.h"
 
 
 class RobotAlgorithm
@@ -60,8 +60,8 @@ protected:
 
 	uint32_t m_remainingSteps = 0;
 
-	const WallSensor *m_wallSensor = nullptr;
-	const DirtSensorInterface* m_dirtSensor = nullptr;
-	const BatterySensorInterface* m_batterySensor = nullptr;
+	const simulation::WallSensor* m_wallSensor = nullptr;
+	const simulation::DirtSensor* m_dirtSensor = nullptr;
+	const simulation::BatterySensor* m_batterySensor = nullptr;
 	
 };

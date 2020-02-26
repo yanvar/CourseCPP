@@ -149,36 +149,36 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="RobotAlgorithm.cpp" />
-    <ClCompile Include="Battery.cpp" />
-    <ClCompile Include="BatterySensor.cpp" />
     <ClCompile Include="CourseCpp.cpp" />
-    <ClCompile Include="DirtSensor.cpp" />
     <ClCompile Include="EdgeAlgo.cpp" />
-    <ClCompile Include="House.cpp" />
-    <ClCompile Include="HouseInterface.cpp" />
     <ClCompile Include="RandomAlgo.cpp" />
-    <ClCompile Include="RobotRepImpl.cpp" />
-    <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="Simulation\Battery.cpp" />
+    <ClCompile Include="Simulation\BatterySensor.cpp" />
+    <ClCompile Include="Simulation\DirtSensor.cpp" />
+    <ClCompile Include="Simulation\House.cpp" />
+    <ClCompile Include="Simulation\RobotRepImpl.cpp" />
+    <ClCompile Include="Simulation\Simulation.cpp" />
+    <ClCompile Include="Simulation\WallSensor.cpp" />
     <ClCompile Include="SpiralAlgo.cpp" />
-    <ClCompile Include="WallSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Common.h" />
     <ClInclude Include="RobotAlgorithm.h" />
-    <ClInclude Include="BatteryInterface.h" />
-    <ClInclude Include="BatterySensor.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="DirtSensor.h" />
-    <ClInclude Include="DirtSensorInterface.h" />
     <ClInclude Include="EdgeAlgo.h" />
-    <ClInclude Include="Battery.h" />
-    <ClInclude Include="WallSensor.h" />
-    <ClInclude Include="House.h" />
-    <ClInclude Include="HouseInterface.h" />
     <ClInclude Include="RandomAlgo.h" />
-    <ClInclude Include="RobotRepImpl.h" />
-    <ClInclude Include="Simulation.h" />
+    <ClInclude Include="Simulation\Battery.h" />
+    <ClInclude Include="Simulation\BatteryInterface.h" />
+    <ClInclude Include="Simulation\BatterySensor.h" />
+    <ClInclude Include="Simulation\BatterySensorInterface.h" />
+    <ClInclude Include="Simulation\DirtSensor.h" />
+    <ClInclude Include="Simulation\DirtSensorInterface.h" />
+    <ClInclude Include="Simulation\House.h" />
+    <ClInclude Include="Simulation\HouseInterface.h" />
+    <ClInclude Include="Simulation\RobotRepImpl.h" />
+    <ClInclude Include="Simulation\Simulation.h" />
+    <ClInclude Include="Simulation\WallSensor.h" />
+    <ClInclude Include="Simulation\WallsensorInterface.h" />
     <ClInclude Include="SpiralAlgo.h" />
-    <ClInclude Include="WallsensorInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />

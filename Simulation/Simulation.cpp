@@ -2,6 +2,7 @@
 
 using namespace std;
 using namespace common;
+using namespace simulation;
 
 Simulation::Simulation(float batteryFullCapacityInSteps, uint32_t batteryConsumptionRate, float batteryRechargeRate) :
 	m_batteryFullCapacityInSteps(batteryFullCapacityInSteps), m_batteryConsumptionRate(batteryConsumptionRate), m_batteryRechargeRate(batteryRechargeRate)

@@ -1,5 +1,7 @@
 #include "BatterySensor.h"
 
+using namespace simulation;
+
 BatterySensor::BatterySensor(BatteryInterface* batteryIf) : m_batteryIf(batteryIf)
 {}
 

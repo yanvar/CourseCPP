@@ -4,17 +4,17 @@
 #include <iostream>
 #include <vector>
 
-#include "Simulation.h"
+#include "Simulation\Simulation.h"
 #include "RandomAlgo.h"
 #include "SpiralAlgo.h"
 #include "EdgeAlgo.h"
-#include "House.h"
 
 #define D_BATTERY_FULL_CAPACITY         (150)
 #define D_BATTERY_CONSUMPTION_STEP_RATE (1)
 #define D_BATTERY_CHARGE_RATE           (2.5)
 
 using namespace std;
+using namespace simulation;
 
 int main()
 {

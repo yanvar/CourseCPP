@@ -1,4 +1,4 @@
-#include "Simulation\House.h"
+#include "House.h"
 
 using namespace std;
 using namespace common;

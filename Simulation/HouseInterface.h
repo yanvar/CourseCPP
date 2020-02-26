@@ -2,8 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "Common\Common.h"
-
+#include "..\Common\Common.h"
 namespace simulation
 {
 	class HouseInterface

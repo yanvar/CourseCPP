@@ -1,5 +1,7 @@
 #include "WallSensor.h"
 
+using namespace simulation;
+
 WallSensor::WallSensor(HouseInterface* houseIf) : m_houseIf(houseIf)
 {}
 

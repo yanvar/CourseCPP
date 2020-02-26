@@ -1,7 +1,7 @@
 #include "Battery.h"
 
 using namespace std;
-
+using namespace simulation;
 
 Battery::Battery(float initChargeLevelInSteps = D_BATTERY_MAX_CHARGE, uint32_t batteryConsumptionRate = D_BATTERY_CONSUMPTION_RATE, float batteryRechargeRate = D_BATTERY_RECHARGE_RATE):
 	m_batteryMaxCapacityInSteps(initChargeLevelInSteps), m_initBatteryLevelInSteps(initChargeLevelInSteps), m_currentBatteryLevelInSteps(initChargeLevelInSteps),

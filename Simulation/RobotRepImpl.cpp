@@ -1,5 +1,7 @@
 #include "RobotRepImpl.h"
 
+using namespace simulation;
+
 RobotRepImpl::RobotRepImpl(HouseInterface* house, BatteryInterface* battery) : m_wallSensor(house), m_dirtSensor(house), m_batterySensor(battery) //k ??? how battery sensor type m_batterySensor initialized by BatteryInterface*
 {
 }
