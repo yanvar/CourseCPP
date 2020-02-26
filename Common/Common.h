@@ -9,6 +9,10 @@ namespace common
 		LEFT, UP, RIGHT, DOWN, STAY
 	};
 
+	enum Neighbours_INDEX {
+		LEFT, UP, RIGHT, DOWN, NEIGHBOURS_TOTAL
+	};
+
 	static std::map<Direction, const char*> DirectionToStr = {
 		{Direction::LEFT,  "Left"},
 		{Direction::UP,    "Up"},
@@ -21,4 +25,6 @@ namespace common
 	enum class Mode {
 		GO, RETURN, DOCK // DOCK may be included in GO
 	};
+
+
 }
