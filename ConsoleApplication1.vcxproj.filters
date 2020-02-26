@@ -107,6 +107,9 @@
     <ClInclude Include="Robotalgo\SpiralAlgo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Robotalgo\CellInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />
