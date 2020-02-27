@@ -21,9 +21,14 @@ namespace common
 		{common::Direction::STAY,  "Stay"}
 	};
 
-	// robot may be either in cleaning mode or Return to Base or Charging on Docking station
-	enum class Mode {
-		GO, RETURN, DOCK // DOCK may be included in GO
+	// robot may be either in cleaning state or Return to Base or Charging on Docking station
+	enum class State {
+		CLEAN_CLEAN, // stay & clean as  current location is still dirty;
+		CLEAN_MOVE, // move as part of clean algo
+		RETURN,// return to docking station 
+		DOCK,  // stay on Docking &CHARGE
+		//MOVE,  // move to specific coordinate - over CLEANED! area
+		FINISH //stay on Dock, return "finsihed" to simulation 
 	};
 
 
