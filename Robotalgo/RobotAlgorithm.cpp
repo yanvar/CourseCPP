@@ -39,7 +39,7 @@ State RobotAlgorithm::calculateState()
 {
 	// minimum between battery and configuration steps left affects decision
 	int bateryStepsLeft = m_batterySensor->stepsLeft();
-	int stepsLeftToReturn = bateryStepsLeft < m_remainingSteps ? bateryStepsLeft : m_remainingSteps;
+	int stepsLeftToReturn = (uint32_t)bateryStepsLeft < m_remainingSteps ? bateryStepsLeft : m_remainingSteps;
 	int stepsFromDockingToGetAndReturnFromClosestDirtSquare = 1;
 	// optimization; int stepsToClosestSquareToVisit = calcStepsToClosestSquareToVisit();
 	// optimization; pair<int, int> closestSquareToVisitCoordinates = getCoordinatesClosestSquareToVisit();
@@ -70,15 +70,18 @@ State RobotAlgorithm::calculateState()
 		return State::RETURN;
 
 	case(State::DOCK):	// charge to full or until charged enough to clean some stuff before algoSteps reach ZERO
-		stepsFromDockingToGetAndReturnFromClosestDirtSquare = (m_distanceToClosestNotCleanSquare + m_spareSteps) * 2 + (((m_distanceToClosestNotCleanSquare + m_spareSteps) * 2 - bateryStepsLeft) / m_calculatedBatteryChargeRate);
+		stepsFromDockingToGetAndReturnFromClosestDirtSquare = (m_distanceToClosestNotCleanSquare + m_spareSteps) * 2 + (uint32_t)(((m_distanceToClosestNotCleanSquare + m_spareSteps) * 2 - bateryStepsLeft) / m_calculatedBatteryChargeRate);
 		if (m_remainingSteps < D_BATTERY_MAX_CHARGE)
-			if (m_remainingSteps < stepsFromDockingToGetAndReturnFromClosestDirtSquare) //steps to: charge + forth + back
+			if (m_remainingSteps < (uint32_t)stepsFromDockingToGetAndReturnFromClosestDirtSquare) //steps to: charge + forth + back
 				return State::FINISH;
-			else if (bateryStepsLeft == (m_remainingSteps + m_spareSteps))
-				return State::CLEAN_MOVE;
-			else if (bateryStepsLeft == D_BATTERY_MAX_CHARGE) //fully charged
-				return State::CLEAN_MOVE; //
+			else if (bateryStepsLeft == m_remainingSteps)
+					return State::CLEAN_MOVE;
 			else
+				return State::DOCK;
+
+		else if (bateryStepsLeft == D_BATTERY_MAX_CHARGE) //fully charged
+				return State::CLEAN_MOVE; //
+			 else
 				return State::DOCK; // continue charging
 
 	case(State::FINISH):
@@ -87,6 +90,7 @@ State RobotAlgorithm::calculateState()
 		static_assert(1, "Unexpected Robot State!");
 		break;
 	}
+	return State::RETURN;
 }
 
 void RobotAlgorithm::updateMapScan(Direction dir)
