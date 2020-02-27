@@ -149,7 +149,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CourseCpp.cpp" />
-    <ClCompile Include="Robotalgo\CellInfo.cpp" />
     <ClCompile Include="Robotalgo\EdgeAlgo.cpp" />
     <ClCompile Include="Robotalgo\RandomAlgo.cpp" />
     <ClCompile Include="Robotalgo\RobotAlgorithm.cpp" />

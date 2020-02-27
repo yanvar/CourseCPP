@@ -51,9 +51,6 @@
     <ClCompile Include="Robotalgo\SpiralAlgo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Robotalgo\CellInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Simulation\Battery.h">
