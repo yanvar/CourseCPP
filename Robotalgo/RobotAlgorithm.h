@@ -70,6 +70,7 @@ namespace robotalgo
 			}
 		};
 
+		typedef std::pair<std::pair<int, int>, CellInfo*> MapCellType;
 		std::unordered_map<std::pair<int, int>, CellInfo*, hash_pair> m_mapCells;
 		std::pair<int, int> m_robotCurLocation = make_pair(0, 0);
 		std::pair<int, int> m_robotClosestNotCleanedSquare = make_pair(0, 0);
@@ -89,6 +90,8 @@ namespace robotalgo
 		void updateMapScan(common::Direction dir);
 		void updateCurrentLocation(common::Direction lastMove);
 		void updateMapping();
+		void updatePathToDocking(common::Direction d);
+		CellInfo* getCellInfoByLocation(std::pair<int, int> location, common::Direction d);
 		
 		
 	

@@ -9,6 +9,8 @@ using namespace robotalgo;
 RobotAlgorithm::RobotAlgorithm()
 {
 	std::cout << "ALGO: Constructor: Base class object - Algo was created!" << std::endl;
+	CellInfo* current = getCellInfoByLocation(m_robotCurLocation, Direction::STAY);
+	current->updateDockingCell();
 }
 
 const uint32_t RobotAlgorithm::getRemainingSteps()
@@ -98,10 +100,34 @@ void RobotAlgorithm::updateMapScan(Direction dir)
 	
 }
 
+//Return cell if exist and if not insert to map
+CellInfo* RobotAlgorithm::getCellInfoByLocation(std::pair<int, int> location, Direction d)
+{
+	auto it = m_mapCells.find(m_robotCurLocation);
+	if (it == m_mapCells.end()) {
+		//Aloc new cell info and add to map
+#define STEP_TO_DOCKING_TODO unsigned(-1)
+		CellInfo* cell = new CellInfo(STEP_TO_DOCKING_TODO, m_wallSensor->isWall(d));
+		m_mapCells.insert(MapCellType(m_robotCurLocation, cell));
+		return cell;
+	}
+
+	return it->second;
+}
+
 void RobotAlgorithm::updateMapping() //include add them to the map or update existing  + set relevand fields
 {
-	
+	CellInfo* current = getCellInfoByLocation(m_robotCurLocation, Direction::STAY);
 
+	//Check if neighbours exist and update accordingly 
+	CellInfo*  neighbors = getCellInfoByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second), Direction::LEFT);
+	current->updatePathToDocking(neighbors);
+	getCellInfoByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second + 1), Direction::UP);
+	current->updatePathToDocking(neighbors);
+	getCellInfoByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second), Direction::RIGHT);
+	current->updatePathToDocking(neighbors);
+	getCellInfoByLocation(std::make_pair(m_robotCurLocation.first , m_robotCurLocation.second -1), Direction::DOWN);
+	current->updatePathToDocking(neighbors);
 }
 
 void RobotAlgorithm::updateCurrentLocation(Direction lastMove)
