@@ -1,44 +1,72 @@
 #include "CellInfo.h"
 
-using namespace robotalgo;
-
-CellInfo::CellInfo(uint32_t stepToDocking, bool isWall)
+//using namespace robotalgo;
+namespace robotalgo
 {
-	m_isDirty = true;
-	m_stepsToDocking = stepToDocking;
-	m_isWall = isWall;
-}
 
-void CellInfo::visitCell()
-{
-	m_visited = true;
-}
-
-bool CellInfo::isVistedCell() const
-{
-	return m_visited;
-}
-
-uint32_t CellInfo::getStepsToDocking() const
-{
-	return m_stepsToDocking;
-}
-
-void CellInfo::updatePathToDocking(CellInfo* neighbour)
-{
-	if (neighbour->m_stepsToDocking < (m_stepsToDocking - 1))
+	CellInfo::CellInfo(uint32_t stepsToDocking, bool isWall)
 	{
-		m_stepsToDocking = neighbour->m_stepsToDocking + 1;
-		m_cellToDocking = neighbour;
+		m_isWall = isWall; 
+		
+		if (m_isWall == false)
+		{
+			m_stepsToDocking = stepsToDocking;
+		}
+		////m_isDirty = true; //true until cell is visited nad foundclean
+		//m_cellIsClean = false;
+		//class CellInfo* m_cellToDocking = nullptr;  //TODO return direction, not pointer
+		//common::Direction m_nextClosestCellToDocking;
+		////bool m_visited = false;
 	}
-}
 
-void CellInfo::updateDockingCell() {
-	m_stepsToDocking = 0;
+	void CellInfo::visitCell()
+	{
+		m_visited = true;
+	}
 
-	//Probably not needed
-	m_isDirty = false;
-	bool m_visited = true;
-	bool m_isWall = false;
+	void CellInfo::cleanCell()
+	{
+		m_isDirty = false;
+	}
+
+	bool CellInfo::isDocking()
+	{
+		return (m_stepsToDocking == 0);
+	}
+
+	bool CellInfo::isVistedCell() const
+	{
+		return m_visited;
+	}
+
+	uint32_t CellInfo::getStepsToDocking() const
+	{
+		return m_stepsToDocking;
+	}
+
+	void CellInfo::setStepsToDocking(uint32_t stepsToDocking);
+	{
+		m_stepsToDocking = stepsToDocking;
+	}
+
+	///void CellInfo::updatePathToDocking(common::Direction dirToNeighbour) //update full path
+	void updatePathToDocking(CellInfo* neighbour)
+	{
+		if (neighbour->m_stepsToDocking < (m_stepsToDocking - 1))
+		{
+			m_stepsToDocking = neighbour->m_stepsToDocking + 1;
+			m_nextClosestCellToDocking = neighbour;
+		}
+
+	}
+
+	void CellInfo::updateDockingCellInfo() {
+		m_stepsToDocking = 0;
+
+		//Probably not needed
+		m_isDirty = false;
+		bool m_visited = true;
+		bool m_isWall = false;
+	}
 }
 

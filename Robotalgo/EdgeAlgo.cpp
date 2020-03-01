@@ -1,16 +1,16 @@
 #include "EdgeAlgo.h"
 
-using namespace robotalgo;
+//using namespace robotalgo;
 using namespace common;
 
-//namespace robotalgo
-//{
+namespace robotalgo
+{
 
 	EdgeAlgo::EdgeAlgo()
 	{
 		std::cout << "EdgeALGO: Constructor: Base class object - EdgeAlgo was created!" << std::endl;
 		m_algoName = "EdgeAlgo";
-		m_algoDescription = "Moves towards obstacle and returns";
+		m_algoDescription = "Moves towards and continues to move along the Walls";
 	}
 
 
@@ -29,10 +29,10 @@ using namespace common;
 		//int stepsLeft = m_batterySensor->stepsLeft();
 
 		updateCurrentLocation(lastMove); // actual location info.
-		m_isCurrentLocationDirty = m_dirtSensor->isDirty();
+		m_isCurrentLocationDirty = m_dirtSensor->isDirty(); //should be part of the mapping update!
 
 		updateMapping(); //no energy required! //based on current location //request 4 direction isWall + isClean on current location
-		m_robotState = calculateState(); // BACK if battery level is critical, clean if still have dirt on current location, go to next location based on ALGO in use.
+		m_robotState = updateState(); // BACK if battery level is critical, clean if still have dirt on current location, go to next location based on ALGO in use.
 		nextStepDirection = calcNextStep(m_robotState, lastMove);// calc where to go based on state, Clean ==> STAY, GO - next to clean, BACK - next to Return
 
 	//	cout << "ALGO: nextStep: Next proposed step is - " << DirectionToStr.at(nextStepDirection) << endl;
@@ -74,7 +74,7 @@ using namespace common;
 		return m_algoDescription;
 	}
 
-	Direction calcNextCleanMoveStep(Direction lastMoveDirection)
+	Direction EdgeAlgo::calcNextCleanMoveStep(Direction lastMoveDirection)
 	{
 		return Direction::STAY;
 
@@ -106,33 +106,33 @@ using namespace common;
 		//
 	}
 
-	Direction calcNextCleanCleanStep()
+	Direction EdgeAlgo::calcNextCleanCleanStep()
 	{
 		return Direction::STAY;
 	}
 
-	Direction calcNextReturnStep()
+	Direction EdgeAlgo::calcNextReturnStep()
 	{
 	/*	std::pair = map.get_pair.first(m_robotCurLocation);
 		return pair.second.closestToDockDirection();*/
 		return Direction::STAY;
 	}
 	
-	Direction closestNeighbourToD() // return either cell.dockClosestDirection or scan all neighbours and return one with min distance
+	Direction EdgeAlgo::closestNeighbourToD() // return either cell.dockClosestDirection or scan all neighbours and return one with min distance
 	{
 		return Direction::STAY;
 		//for(auto iter : 
 	}
 
-	Direction calcNextDockStep()
+	Direction EdgeAlgo::calcNextDockStep()
 	{
 		return Direction::STAY;
 	}
-	Direction calcNextFinishStep()
+	Direction EdgeAlgo::calcNextFinishStep()
 	{
 		//k2 robotalgo::RobotAlgorithm::m_finishFlag = true;
 		return Direction::STAY;
 	}
 	
 
-//}
+}

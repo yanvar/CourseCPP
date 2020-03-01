@@ -34,18 +34,27 @@ namespace robotalgo
 		virtual const std::string& getName() const= 0;
 		virtual const std::string& getDescription() const = 0;
 
+		common::State updateState();
+
+		uint32_t m_DiatanceToDockingFromCurLocation = 0;
 
 		//TBD
 		uint32_t calculateOptimalStepsToCharge();
 		uint32_t calculateChargeRateAndStore();
 		// decide whether we on GO, RETURN or CHARGE state
-		common::State calculateState();
-		bool m_finishFlag = false;
+		
+		//bool m_finishFlag = false;
 
 	protected: //definitely MUST
+
+		const simulation::WallSensor* m_wallSensor = nullptr;
+		const simulation::DirtSensor* m_dirtSensor = nullptr;
+		const simulation::BatterySensor* m_batterySensor = nullptr;
+
 		std::string m_algoName;
 		std::string m_algoDescription;
-		//bool m_finishFlag = false;
+		
+		bool m_finishFlag = false;
 		bool m_houseIsClean = false;
 		common::State m_robotState = common::State::CLEAN_MOVE; //reconsider init val.
 
@@ -55,10 +64,45 @@ namespace robotalgo
 		// optimization: bool m_wallsOutlineComplete = false;
 		float m_calculatedBatteryChargeRate = 1;
 		int m_distanceToClosestNotCleanSquare = 1;
+		//uint32_t m_DiatanceToDockingFromCurLocation = 0;  // add setter/getter;
 
 		int m_shortestPathToD = 0;
 		int m_spareSteps = D_SPARE_BATTERY_STEPS_ON_RETURN;
 
+		
+
+		CellInfo* getCellInfoByLocation(std::pair<int, int> location, common::Direction d);
+
+		CellInfo* addCellToMap(std::pair<int, int> location, common::Direction neighbourDirection);
+		uint32_t distanceToDockingFromLocation(std::pair<int, int> cellCoordinates);
+		CellInfo* addNeighbourToMap(std::pair<int, int> neighbourCoordinates, common::Direction NeighborLocationSide, uint32_t stepsToDfromCurrentLocation);
+
+
+		
+
+		
+		void updateMapScan(common::Direction dir);
+		void updateCurrentLocation(common::Direction lastMove);
+		void updateMapping();
+		//TODO - replace by michal: void updatePathToDocking(common::Direction d);
+		
+		
+	
+
+		// dynamic map is required!! to mark Undescovered, clean and dirt levels - on discovered map
+		//TBD
+
+		// map that holds -  battery level : steps added after 1 charging time;
+		std::map<uint32_t, uint32_t> m_calculatedBatteryChargingRate;
+
+		const uint32_t getRemainingSteps();
+		void decrementRemainingStep();
+		//bool addNewCell();
+		bool isCellExist();
+
+
+		/////////////////////////////////////////////////////////////////////////
+		//MAP PART - TODO: should be separated to stand alone object + .h + .cpp files 
 		// A hash function used to hash a pair of any kind 
 		struct hash_pair {
 			template <class T1, class T2>
@@ -77,37 +121,7 @@ namespace robotalgo
 		//std::pair<int, int> m_locationToMoveCoordinates = make_pair(0, 0);
 		//vector<Direction> m_locationToMoveDirectionsVector = {};
 
-		
-
-		const simulation::WallSensor* m_wallSensor = nullptr;
-		const simulation::DirtSensor* m_dirtSensor = nullptr;
-		const simulation::BatterySensor* m_batterySensor = nullptr;
-
-
-		/////////////////////////////////////////////////////////////////////////
-
-		
-		void updateMapScan(common::Direction dir);
-		void updateCurrentLocation(common::Direction lastMove);
-		void updateMapping();
-		void updatePathToDocking(common::Direction d);
-		CellInfo* getCellInfoByLocation(std::pair<int, int> location, common::Direction d);
-		
-		
-	
-
-		// dynamic map is required!! to mark Undescovered, clean and dirt levels - on discovered map
-		//TBD
-
-		// map that holds -  battery level : steps added after 1 charging time;
-		std::map<uint32_t, uint32_t> m_calculatedBatteryChargingRate;
-
-		const uint32_t getRemainingSteps();
-		void decrementRemainingStep();
-		bool addNewCell();
-		bool isCellExist();
-
-
-		
+		void updateCurrentLocationInfo(bool isDirty);
+		bool RobotAlgorithm::addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isWall);
 	};
 }

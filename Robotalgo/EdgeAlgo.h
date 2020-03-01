@@ -21,5 +21,6 @@ namespace robotalgo
 		common::Direction calcNextReturnStep();
 		common::Direction calcNextDockStep();
 		common::Direction calcNextFinishStep();
+		common::Direction closestNeighbourToD();
 	};
 }
