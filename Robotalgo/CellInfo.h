@@ -8,10 +8,11 @@ namespace robotalgo
 	public:
 		CellInfo(uint32_t stepToDocking, bool isWall);
 		void visitCell();
+		void cleanCell();
 		bool isVistedCell() const;
 		uint32_t getStepsToDocking() const;
 		void setStepsToDocking(uint32_t stepsToDocking);
-		void updatePathToDocking(CellInfo* neighbour);
+		//void updatePathToDocking(CellInfo* neighbour);
 		//void updatePathToDocking(common::Direction dirToNeighbour); // iterate the whole path includes steps to docking + neighbour directions
 		void updateDockingCellInfo();
 		bool isDocking();

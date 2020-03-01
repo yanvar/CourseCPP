@@ -44,7 +44,7 @@ namespace robotalgo
 		return m_stepsToDocking;
 	}
 
-	void CellInfo::setStepsToDocking(uint32_t stepsToDocking);
+	void robotalgo::CellInfo::setStepsToDocking(uint32_t stepsToDocking)
 	{
 		m_stepsToDocking = stepsToDocking;
 	}

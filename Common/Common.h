@@ -3,6 +3,8 @@
 #include <string>
 #include <map>
 
+#define D_MAX_INT_VAL (0xFFFFFFFF)
+
 namespace common
 {
 	enum class Direction {

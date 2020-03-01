@@ -29,9 +29,11 @@ namespace robotalgo
 		//int stepsLeft = m_batterySensor->stepsLeft();
 
 		updateCurrentLocation(lastMove); // actual location info.
-		m_isCurrentLocationDirty = m_dirtSensor->isDirty(); //should be part of the mapping update!
+		//m_isCurrentLocationDirty = m_dirtSensor->isDirty(); //should be part of the mapping update!
+		
 
-		updateMapping(); //no energy required! //based on current location //request 4 direction isWall + isClean on current location
+		if (lastMove != Direction::STAY) //k optimization - check amount of neighbours, known neighbours etc...
+			updateMapping(); //no energy required! //based on current location //request 4 direction isWall + isClean on current location
 		m_robotState = updateState(); // BACK if battery level is critical, clean if still have dirt on current location, go to next location based on ALGO in use.
 		nextStepDirection = calcNextStep(m_robotState, lastMove);// calc where to go based on state, Clean ==> STAY, GO - next to clean, BACK - next to Return
 
