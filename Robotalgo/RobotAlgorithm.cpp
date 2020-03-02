@@ -113,38 +113,121 @@ void RobotAlgorithm::updateMapScan(Direction dir)
 //	return it->second;
 //}
 
-void RobotAlgorithm::setStepsToDockOnMap(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCell)
+//Return distance to Docking if cell exists or maxDistance = 0xFFFFFFFF
+uint32_t RobotAlgorithm::getCellDistanceToDByLocation(std::pair<int, int> location)
 {
-	uint32_t neighbourDistanceToDocking;
+	auto it = m_mapCells.find(location);
+	if (it == m_mapCells.end())
+		return D_UNINITIALIZED_DISTANCE;
+
+	return it->second->getStepsToDocking();
+}
+
+uint32_t RobotAlgorithm::setStepsToDockOnMap(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCell)
+{
 	// set distance in steps 
 	CellInfo* cellToUpdate = findCell(cellCoordinates);
-	if ((cellToUdate == nullptr) || (cellToUdate->isWall() == true) || (cellToUdate->isDocking())
+	if ((cellToUpdate == nullptr) || (cellToUpdate->isWall() == true) || (cellToUpdate->isDocking()))
 	{
-		ASSERT(!"Function shouldn't try to update distance to D for wall, Docking or unknown cell!");
+		_ASSERT(!"Function shouldn't try to update distance to D for wall, Docking or unknown cell!");
+		return D_MAX_DISTANCE_VAL;
 	}
+	else
+	{
+		cellToUpdate->setStepsToDocking(stepsToDfromCell);
+		return stepsToDfromCell;
+	}
+}
 
 //get distance to D from all existing neighbours while standing on specific cell
-uint32_t getMinimumDistanceToDfromAllNeighbours()
+uint32_t RobotAlgorithm::getMinimumDistanceToDfromAllNeighbours()
 {
-	uint32_t minDistanceToD = RobotAlgorithm::distanceToDockingFromLocation(m_robotCurLocation); // D_MAX_INT_VAL; // may start from current value!!
-	uint32_t neighbourDistanceToD = D_MAX_INT_VAL;
+	uint32_t minNeighboursDistanceToD = D_MAX_DISTANCE_VAL; /// wrong curr location distance shouldn't be part of consideration as i have to add 1 afterwards RobotAlgorithm::distanceToDockingFromLocation(m_robotCurLocation); // D_MAX_INT_VAL; // may start from current value!!
+	uint32_t minNeighbourNeighbourDistanceToD = D_MAX_DISTANCE_VAL;
+	uint32_t neighbourDistanceToD = D_MAX_DISTANCE_VAL;
 
 	//isCellExistsOnMap(m_robotCurLocation.first)
 
-	// check LEFT neighbour:
-	neighbourDistanceToD = getCellInfoByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second));
-	minDistanceToD = neighbourDistanceToD < minDistanceToD ? neighbourDistanceToD : minDistanceToD;
+	// check LEFT neighbour: //k optimize : iter over enum index of Directions
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second));
+	//only in case of uninitialized cell it's possible lower neighbours should be checked(flore or Wall shouldn't be tested!)
+	//flore - all the neighbours are settled, Wall - we may not pass through it.
+	if (neighbourDistanceToD < D_WALL_DISTANCE)
+	{
+		minNeighboursDistanceToD = neighbourDistanceToD < minNeighboursDistanceToD ? neighbourDistanceToD : minNeighboursDistanceToD;
+	}
+	else // checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
+	{
+		//access LEFT - DOWN
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second - 1));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		//access LEFT - UP
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second + 1));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		//access LEFT - LEFT
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 2, m_robotCurLocation.second));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	}
 	// check RIGHT neighbour:
-	neighbourDistanceToD = getCellInfoByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second));
-	minDistanceToD = neighbourDistanceToD < minDistanceToD ? neighbourDistanceToD : minDistanceToD;
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second));
+	if (neighbourDistanceToD < D_WALL_DISTANCE)
+	{
+		minNeighboursDistanceToD = neighbourDistanceToD < minNeighboursDistanceToD ? neighbourDistanceToD : minNeighboursDistanceToD;
+	}
+	else // checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
+	{
+	//access RIGHT - DOWN
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second - 1));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	//access RIGHT - UP
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second + 1));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	//access RIGHT - RIGHT
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 2, m_robotCurLocation.second));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	}
 	// check UP neighbour:
-	neighbourDistanceToD = getCellInfoByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second + 1));
-	minDistanceToD = neighbourDistanceToD < minDistanceToD ? neighbourDistanceToD : minDistanceToD;
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second + 1));
+	if (neighbourDistanceToD < D_WALL_DISTANCE)
+	{
+		minNeighboursDistanceToD = neighbourDistanceToD < minNeighboursDistanceToD ? neighbourDistanceToD : minNeighboursDistanceToD;
+	}
+	else // checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
+	{
+	//access UP - RIGHT
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second + 1));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	//access UP - LEFT
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second + 1));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	//access UP - UP
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second + 2));
+	minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	}
 	// check DOWN neighbour:
-	neighbourDistanceToD = getCellInfoByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second - 1));
-	minDistanceToD = neighbourDistanceToD < minDistanceToD ? neighbourDistanceToD : minDistanceToD;
+	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second - 1));
+	if (neighbourDistanceToD < D_WALL_DISTANCE)
+	{
+		minNeighboursDistanceToD = neighbourDistanceToD < minNeighboursDistanceToD ? neighbourDistanceToD : minNeighboursDistanceToD;
+	}
+	else // checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
+	{
+		//access DOWN - LEFT
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second - 1));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		//access DOWN - RIGHT
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second - 1));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		//access DOWN - DOWN
+		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second - 2));
+		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+	}
+
+	if minNeighbourNeighbourDistanceToD < D_WALL_DISTANCE
+		minNeighboursDistanceToD = minNeighboursDistanceToD < (minNeighbourNeighbourDistanceToD + 1) ? minNeighboursDistanceToD : (minNeighbourNeighbourDistanceToD + 1);
 	
-	return minDistanceToD;
+	//we will get at least single initialized (not 0xFFFFFFFF) value, as we come from somewhere.
+	return minNeighboursDistanceToD;
 }
 
 
@@ -158,19 +241,24 @@ uint32_t getMinimumDistanceToDfromAllNeighbours()
 	//      else - addNewCellToMap
 	//			update distance, isClean, isVisited, etc........  onTheWayBack???maybe
 
-	//if  
+
 void RobotAlgorithm::updateMapping() //include add them to the map or update existing  + set relevant fields
 {
-	
+	if ((m_robotCurLocation != D_DOCKING_LOCATION)) // usually!?!
+	{
+		updateCurrentLocationInfo(m_dirtSensor->isDirty());
 
-	//m_isCurrentLocationDirty = m_dirtSensor->isDirty(); //should be part of the mapping update!
-	updateCurrentLocationInfo(m_dirtSensor->isDirty());
-	//replace by iterator over enum Direction!!
-	m_DiatanceToDockingFromCurLocation = updateStepsToDock(m_robotCurLocation, getMinimumDistanceToDfromAllNeighbours() + 1);
+		//m_DiatanceToDockingFromCurLocation = updateStepsToDock(m_robotCurLocation, getMinimumDistanceToDfromAllNeighbours() + 1);
+		// calculate minimal distance to D from all neighbours and set curr location to minimum + 1.
+		// it will be starting point to addition of all
+		m_DiatanceToDockingFromCurLocation = setStepsToDockOnMap(m_robotCurLocation, getMinimumDistanceToDfromAllNeighbours() + 1);
+	}
 	
-	RobotAlgorithm::distanceToDockingFromLocation(m_robotCurLocation);
-
-	//Check if neighbours exist and update accordingly 
+	//k remove maybe: RobotAlgorithm::distanceToDockingFromLocation(m_robotCurLocation);
+	//k optimization: replace by iterator over enum Direction!!
+	//Check if neighbours exist and if needed, update neighbour accordingly
+	//if neighbour isn't exist, add it + check it's neighbours 
+	//ONLY ONE!!  iteration over all cells is required as we scaned 2 levels of neighbours and found minimum distance possible
 	RobotAlgorithm::addNeighbourToMap(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second), Direction::LEFT, m_DiatanceToDockingFromCurLocation);
 	//k mange neighbors amount current->updatePathToDocking(neighbors);
 	RobotAlgorithm::addNeighbourToMap(std::make_pair(m_robotCurLocation.first, m_robotCurLocation.second + 1), Direction::UP, m_DiatanceToDockingFromCurLocation);
@@ -263,7 +351,7 @@ bool RobotAlgorithm::addNewCell(std::pair<int, int> cellCoordinates, uint32_t st
 
 bool RobotAlgorithm::isCellExistsOnMap(std::pair<int, int> coordinates)
 {
-	auto it = m_houseMap.find(m_robotCurLocation);
+	auto it = m_mapCells.find(m_robotCurLocation);
 	if (it == m_mapCells.end())
 		return false;
 	return true;
@@ -305,7 +393,7 @@ CellInfo* RobotAlgorithm::addNeighbourToMap(std::pair<int, int> neighbourCoordin
 	else if (stepsToDfromNeighbour < stepsToDfromCurrentLocation - 1)
 	{
 		cout << "Neighbour exists on map. Steps from Current Location should be updated!" << std::endl;
-		updateStepsToDock(m_currentRobotLocation, stepsToDfromNeighbour + 1);
+		updateStepsToDock(m_robotCurLocation, stepsToDfromNeighbour + 1);
 	}
 	else //if (stepsToDfromNeighbour > stepsToDfromCurrentLocation + 1)
 	{
@@ -320,7 +408,6 @@ CellInfo* RobotAlgorithm::findCell(std::pair<int, int> neighbourCoordinates)
 	auto it = m_mapCells.find(m_robotCurLocation);
 	if (it != m_mapCells.end())
 		return it->second;
-	}
 	return nullptr;
 }
 
@@ -335,20 +422,20 @@ uint32_t RobotAlgorithm::distanceToDockingFromLocation(std::pair<int, int> cellC
 void RobotAlgorithm::updateDistanceForSingleDirection(std::pair<int, int> neighbourCoordinates, uint32_t stepsToDfromCell)
 {
 	//uint32_t neighbourDistanceToDocking = distanceToDockingFromLocation(std::make_pair(cellCoordinates.first - 1, cellCoordinates.second));
-	uint32_t neighbourDistanceToDocking = RobotAlgorithm::distanceToDockingFromLocation(NeighbourCoordinates));
+	uint32_t neighbourDistanceToDocking = RobotAlgorithm::distanceToDockingFromLocation(neighbourCoordinates);
 	if ((neighbourDistanceToDocking == 0) || (neighbourDistanceToDocking == 0xFFFFFFFF))
 		return;
 
 	int distanceToNeighbour = neighbourDistanceToDocking - stepsToDfromCell;
-	if (abs(distanceToNeighbour)) == 1)
+	if ((abs(distanceToNeighbour)) == 1)
 	return;// finished update in this direction     //// , Direction::LEFT, m_DiatanceToDockingLocation);
-	else if  distanceToNeighbour > 1 // neighbour is further from D, then currentCell (it should be decremented to dist + 1
+	else if (distanceToNeighbour > 1) // neighbour is further from D, then currentCell (it should be decremented to dist + 1
 	{
-		RobotAlgorithm::updateStepsToDock(NeighbourCoordinates, stepsToDfromCell - 1); //LEFT
+		RobotAlgorithm::updateStepsToDock(neighbourCoordinates, stepsToDfromCell - 1); //LEFT
 		return;
 	}
 	else //distance to neighbour < - 1  //SHOULDN"T HAPPEN as before update all consecutive cells are on 1 distance!!! ERROR!
-		ASSERT(!"ERROR! Nighbour distance to D is smaller than current cell");
+		_ASSERT(!"ERROR! Nighbour distance to D is smaller than current cell");
 }
 
 // gets location to update + value to set
@@ -357,12 +444,12 @@ void RobotAlgorithm::updateDistanceForSingleDirection(std::pair<int, int> neighb
 // This function already knows that specific cell should be updated, while neghbours may require update as well
 void RobotAlgorithm::updateStepsToDock(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCell)
 {
-	uint32_t neighbourDistanceToDocking;
+	//uint32_t neighbourDistanceToDocking;
 	// set distance in steps 
 	CellInfo* cellToUpdate = findCell(cellCoordinates);
-	if ((cellToUdate == nullptr) || (cellToUdate->isWall() == true) || (cellToUdate->isDocking())
+	if ((cellToUpdate == nullptr) || (cellToUpdate->isWall() == true) || (cellToUpdate->isDocking()))
 	{
-		ASSERT(!"Function shouldn't try to update distance to D for wall, Docking or unknown cell!");
+		_ASSERT(!"Function shouldn't try to update distance to D for wall, Docking or unknown cell!");
 	}
 		
 	// in case cell is floor

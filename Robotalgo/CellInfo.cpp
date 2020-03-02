@@ -39,6 +39,11 @@ namespace robotalgo
 		return m_visited;
 	}
 
+	bool CellInfo::isWall() const
+	{
+		return m_isWall;
+	}
+
 	uint32_t CellInfo::getStepsToDocking() const
 	{
 		return m_stepsToDocking;

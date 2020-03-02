@@ -71,16 +71,18 @@ namespace robotalgo
 
 		
 
-		CellInfo* getCellInfoByLocation(std::pair<int, int> location, common::Direction d);
+		//CellInfo* getCellInfoByLocation(std::pair<int, int> location, common::Direction d);
+		uint32_t getMinimumDistanceToDfromAllNeighbours();
+		uint32_t getCellDistanceToDByLocation(std::pair<int, int> location);
+		uint32_t setStepsToDockOnMap(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCell);
 
-		CellInfo* addCellToMap(std::pair<int, int> location, common::Direction neighbourDirection);
+		//CellInfo* addCellToMap(std::pair<int, int> location, common::Direction neighbourDirection);
 		uint32_t distanceToDockingFromLocation(std::pair<int, int> cellCoordinates);
 		CellInfo* addNeighbourToMap(std::pair<int, int> neighbourCoordinates, common::Direction NeighborLocationSide, uint32_t stepsToDfromCurrentLocation);
 		CellInfo* findCell(std::pair<int, int> neighbourCoordinates);
 		void updateDistanceForSingleDirection(std::pair<int, int> neighbourCoordinates, uint32_t stepsToDfromCell);
 		void updateStepsToDock(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCell);
-		uint32_t getMinimumDistanceToDfromAllNeighbours();
-		bool HouseMap::isCellExistsOnMap(std::pair<int, int> coordinates);
+		bool isCellExistsOnMap(std::pair<int, int> coordinates);
 
 		
 		void updateMapScan(common::Direction dir);
@@ -124,6 +126,6 @@ namespace robotalgo
 		//vector<Direction> m_locationToMoveDirectionsVector = {};
 
 		void updateCurrentLocationInfo(bool isDirty);
-		bool RobotAlgorithm::addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall);
+		bool addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall);
 	};
 }
