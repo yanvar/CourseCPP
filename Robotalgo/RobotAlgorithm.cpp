@@ -145,6 +145,7 @@ uint32_t RobotAlgorithm::getMinimumDistanceToDfromAllNeighbours()
 	uint32_t minNeighboursDistanceToD = D_MAX_DISTANCE_VAL; /// wrong curr location distance shouldn't be part of consideration as i have to add 1 afterwards RobotAlgorithm::distanceToDockingFromLocation(m_robotCurLocation); // D_MAX_INT_VAL; // may start from current value!!
 	uint32_t minNeighbourNeighbourDistanceToD = D_MAX_DISTANCE_VAL;
 	uint32_t neighbourDistanceToD = D_MAX_DISTANCE_VAL;
+	bool isNeighbourWall = false;
 
 	//isCellExistsOnMap(m_robotCurLocation.first)
 
@@ -156,17 +157,26 @@ uint32_t RobotAlgorithm::getMinimumDistanceToDfromAllNeighbours()
 	{
 		minNeighboursDistanceToD = neighbourDistanceToD < minNeighboursDistanceToD ? neighbourDistanceToD : minNeighboursDistanceToD;
 	}
-	else // checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
+	else if (neighbourDistanceToD == D_UNINITIALIZED_DISTANCE) // check only uninitialized, WALL is our of scope// checks 3 neighbour's neighbours (4th neighbour is currentRobotLocation
 	{
-		//access LEFT - DOWN
-		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second - 1));
-		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
-		//access LEFT - UP
-		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second + 1));
-		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
-		//access LEFT - LEFT
-		neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 2, m_robotCurLocation.second));
-		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		isNeighbourWall = m_wallSensor->isWall(Direction::LEFT);
+		if (isNeighbourWall)
+			addNewCell(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second), D_WALL_DISTANCE, m_wallSensor->isWall(Direction::LEFT));
+		else //not a wall
+		{
+			//add new neighbour
+			minNeighbourNeighbourDistanceToD = (addNewCell(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second), D_UNINITIALIZED_DISTANCE, m_wallSensor->isWall(Direction::LEFT)))->getStepsToDocking();
+
+			//access LEFT - DOWN
+			neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second - 1));
+			minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+			//access LEFT - UP
+			neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 1, m_robotCurLocation.second + 1));
+			minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+			//access LEFT - LEFT
+			neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first - 2, m_robotCurLocation.second));
+			minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
+		}
 	}
 	// check RIGHT neighbour:
 	neighbourDistanceToD = getCellDistanceToDByLocation(std::make_pair(m_robotCurLocation.first + 1, m_robotCurLocation.second));
@@ -223,7 +233,7 @@ uint32_t RobotAlgorithm::getMinimumDistanceToDfromAllNeighbours()
 		minNeighbourNeighbourDistanceToD = neighbourDistanceToD < minNeighbourNeighbourDistanceToD ? neighbourDistanceToD : minNeighbourNeighbourDistanceToD;
 	}
 
-	if minNeighbourNeighbourDistanceToD < D_WALL_DISTANCE
+	if (minNeighbourNeighbourDistanceToD < D_WALL_DISTANCE)
 		minNeighboursDistanceToD = minNeighboursDistanceToD < (minNeighbourNeighbourDistanceToD + 1) ? minNeighboursDistanceToD : (minNeighbourNeighbourDistanceToD + 1);
 	
 	//we will get at least single initialized (not 0xFFFFFFFF) value, as we come from somewhere.
@@ -336,17 +346,16 @@ void RobotAlgorithm::updateCurrentLocation(Direction lastMove)
 
 
 
-bool RobotAlgorithm::addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall)
+CellInfo* RobotAlgorithm::addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall)
 {
 	auto it = m_mapCells.find(cellCoordinates);
 	if (it == m_mapCells.end()) {
 		CellInfo* cell = new CellInfo(stepsToDfromCurrentLocation, isCellWall);
 		m_mapCells.insert(MapCellType(cellCoordinates, cell));
-		return true;
+		return cell;
 	}
 	cout << "Cell exists" << std::endl;
-	return false;
-	
+	return it->second;
 }
 
 bool RobotAlgorithm::isCellExistsOnMap(std::pair<int, int> coordinates)

@@ -6,7 +6,7 @@
 
 #include "CellInfo.h"
 #include "..\Common\Common.h"
-#include "..\Simulation\RobotRepImpl.h"
+#include "..\Simulation\RobotRepImpl.h"   //k AMIR - Algorithm shouldn't be familiar with Simulation - doesn't exist in real world
 
 #define D_DOCKING_LOCATION                make_pair(0,0)
 #define D_SPARE_BATTERY_STEPS_ON_RETURN   (0)
@@ -126,6 +126,6 @@ namespace robotalgo
 		//vector<Direction> m_locationToMoveDirectionsVector = {};
 
 		void updateCurrentLocationInfo(bool isDirty);
-		bool addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall);
+		CellInfo* addNewCell(std::pair<int, int> cellCoordinates, uint32_t stepsToDfromCurrentLocation, bool isCellWall);
 	};
 }

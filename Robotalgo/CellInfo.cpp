@@ -55,7 +55,7 @@ namespace robotalgo
 	}
 
 	///void CellInfo::updatePathToDocking(common::Direction dirToNeighbour) //update full path
-	void updatePathToDocking(CellInfo* neighbour)
+	/*void updatePathToDocking(CellInfo* neighbour)
 	{
 		if (neighbour->m_stepsToDocking < (m_stepsToDocking - 1))
 		{
@@ -63,7 +63,7 @@ namespace robotalgo
 			m_nextClosestCellToDocking = neighbour;
 		}
 
-	}
+	}*/
 
 	void CellInfo::updateDockingCellInfo() {
 		m_stepsToDocking = 0;
