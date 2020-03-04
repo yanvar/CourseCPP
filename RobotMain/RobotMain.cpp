@@ -1,6 +1,6 @@
 // CourseCppMain.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#include "..\..\CourseCPP\Simulation\Simulation.h"
+#include "../Simulation/Simulation.h"
 
 #include <iostream>
 
