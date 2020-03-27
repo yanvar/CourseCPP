@@ -18,101 +18,100 @@
     <ClCompile Include="CourseCpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Simulation.cpp">
+    <ClCompile Include="Simulation\Battery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Algo.cpp">
+    <ClCompile Include="Simulation\BatterySensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RobotRep.cpp">
+    <ClCompile Include="Simulation\DirtSensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="House.cpp">
+    <ClCompile Include="Simulation\House.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HouseInterface.cpp">
+    <ClCompile Include="Simulation\WallSensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Simulation\Simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RandomAlgo.cpp">
+    <ClCompile Include="Simulation\RobotRepImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EdgeAlgo.cpp">
+    <ClCompile Include="Robotalgo\EdgeAlgo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpiralAlgo.cpp">
+    <ClCompile Include="Robotalgo\RandomAlgo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Battery.cpp">
+    <ClCompile Include="Robotalgo\RobotAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CleanlinessSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WallSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WallSensorInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirtSensor.cpp">
+    <ClCompile Include="Robotalgo\SpiralAlgo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Simulation.h">
+    <ClInclude Include="Simulation\Battery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
+    <ClInclude Include="Simulation\BatteryInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RobotRep.h">
+    <ClInclude Include="Simulation\BatterySensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Algo.h">
+    <ClInclude Include="Simulation\BatterySensorInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="House.h">
+    <ClInclude Include="Simulation\DirtSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HouseInterface.h">
+    <ClInclude Include="Simulation\DirtSensorInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandomAlgo.h">
+    <ClInclude Include="Simulation\House.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpiralAlgo.h">
+    <ClInclude Include="Simulation\HouseInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EdgeAlgo.h">
+    <ClInclude Include="Simulation\RobotRepImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Battery.h">
+    <ClInclude Include="Simulation\Simulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CleanlinessSensor.h">
+    <ClInclude Include="Simulation\WallSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WallSensor.h">
+    <ClInclude Include="Simulation\WallsensorInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WallsensorInterface.h">
+    <ClInclude Include="Common\Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DirtSensor.h">
+    <ClInclude Include="Robotalgo\EdgeAlgo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DirtSensorInterface.h">
+    <ClInclude Include="Robotalgo\RandomAlgo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BatteryInterface.h">
+    <ClInclude Include="Robotalgo\RobotAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Robotalgo\SpiralAlgo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Robotalgo\CellInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="House1.txt" />
     <Text Include="House2.txt" />
+    <Text Include="Result.txt" />
+    <Text Include="House3.txt" />
   </ItemGroup>
 </Project>

@@ -4,19 +4,20 @@
 #include <iostream>
 #include <vector>
 
-#include "Simulation.h"
-#include "RandomAlgo.h"
-#include "SpiralAlgo.h"
-#include "EdgeAlgo.h"
-#include "House.h"
+#include "Simulation\Simulation.h"
+#include "Robotalgo\RandomAlgo.h"
+#include "Robotalgo\SpiralAlgo.h"
+#include "Robotalgo\EdgeAlgo.h"
 
 #define D_BATTERY_FULL_CAPACITY         (150)
 #define D_BATTERY_CONSUMPTION_STEP_RATE (1)
 #define D_BATTERY_CHARGE_RATE           (2.5)
 
 using namespace std;
+using namespace simulation;
+using namespace robotalgo;
 
-int main()
+int main1()
 {
     //k string housePath1 = "House1.txt"; // path depends on PC (should be switched to relative path c_str(); to try
     //k string housePath2 = "House2.txt";
@@ -30,13 +31,15 @@ int main()
     sim.addHouse("House2.txt");
 	//k sim.addHouse(housePath2);
 
-	sim.addAlgo(algo1);
-	sim.addAlgo(algo2);
+	sim.addAlgo(&algo1);
+	sim.addAlgo(&algo2);
 
 	sim.runSim();
 
-    //Simulation::printResults();
-    //Simulation::writeResultsToFile();
+    sim.printResults();
+    sim.writeResultsToFile();
+
+    return 0;
 }
 
 
